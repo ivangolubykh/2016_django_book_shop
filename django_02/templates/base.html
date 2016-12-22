@@ -42,11 +42,12 @@
 						<strong class="entry">
 							<center>Вход в систему.</center>
 							<center>
-								<form>
-									<input type="text" name="login" size="11" placeholder="Логин">
-									<br><input type="password" name="login" size="11" placeholder="Пароль">
+								<form method="post" action="{% url 'login' %}">
+									{% csrf_token %}
+									<input type="text" name="login" size="8" placeholder="Логин">
+									<br><input type="password" name="password" size="8" placeholder="Пароль">
 									<br><label><input type="checkbox" name="save"><strong class="p">Запомнить меня</strong></label>
-									<br><input type="submit" value="Войти" size="11">
+									<br><input type="submit" value="Войти">
 								</form>
 							</center>
 
@@ -54,11 +55,25 @@
 						--><strong class="registr">
 							<center>Регистрация</center>
 							<p>Первый раз в нашем магазине? Зарегистрируйтесь и получите доступ к расширенным возможностям сайта</p>
-							<br><input type="button" value="Зарегистрироваться" size="11" onclick="javascript:location.href='{% url 'main' %}';">
+						<center><input type="button" value="Регистрация" size="11" onclick="javascript:location.href='{% url 'main' %}';"></center>
 						</strong>
 
 					</div>
-					<label class="sign_click" for="sign">Вход/Регистрация</label>
+					{% if user.is_authenticated %}
+						<form action="{% url 'logout' %}">
+							{% csrf_token %}
+							<input type="submit" value="Разлогиниться">
+						</form>
+					{% else %}
+						<label class="sign_click" for="sign">Вход/Регистрация</label>
+
+						{% if erros %}
+							<label class="erros_login">
+								<input type="checkbox">
+								<p>Ошибка: такое сочетание логина и пароля не обнаружено.</p>
+							</label>
+						{% endif %}
+					{% endif %}
 
 				</td>
 				<td class="cargo">
@@ -79,6 +94,7 @@
 	<article>
 
 		Тут-то всё и будет.
+		<p>Пока что тестовый пользователь: suser q12345678</p>
 
 	</article>
 </div>

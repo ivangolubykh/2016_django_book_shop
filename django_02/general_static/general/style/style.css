@@ -72,8 +72,8 @@ header table td {
 
 #sign + div, #sign {
     position: absolute;
-    width: 400px;
-    margin: -1000px;
+    width: 300px;
+    margin-left: -5000px;
     border: 1px solid #f3dbdb;
     -moz-transform: scale(0, 0) rotate(90deg); /* Для Firefox */
     -ms-transform: scale(0, 0) rotate(90deg); /* Для IE */
@@ -96,18 +96,20 @@ header table td {
     background: #ededed;
     text-align: right;
     margin-top: 20px;
-    margin-left: -160px;
+    margin-left: 0px;
+    right: 5px;
     -moz-transform: scale(1, 1) rotate(0deg); /* Для Firefox */
     -ms-transform: scale(1, 1) rotate(0deg); /* Для IE */
     -webkit-transform: scale(1, 1) rotate(0deg); /* Для Safari, Chrome, iOS */
     -o-transform: scale(1, 1) rotate(0deg); /* Для Opera */
     transform: scale(1, 1) rotate(0deg);
 }
+
 .entry, .registr {
     display: inline-block;
     height: 100%;
     vertical-align: top;
-    width: 200px;
+    width: 150px;
     text-align: left;
 }
 
@@ -123,6 +125,29 @@ header table td {
     font-weight: bold;
 }
 
+.erros_login input {
+    display: none;
+    position: absolute;
+}
+
+.erros_login input + p {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    padding: 4px;
+    background: rgba(237,237,237,0.5);
+    text-align: right;
+    margin-top: 0px;
+    margin-left: 0px;
+    right: 5px;
+    width:200px;
+    color: red;
+    text-align: center;
+}
+
+.erros_login input:checked +p {
+    display: none;
+}
 
 
 .cargo {
