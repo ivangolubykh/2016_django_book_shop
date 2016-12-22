@@ -1,0 +1,188 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    max-width: 1280px;
+    min-width: 300px;
+    margin: 0 auto;
+    border: 0px;
+    background-color: #ffffff;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+}
+
+a:link, a {
+    color:inherit;
+    text-decoration:none;
+}
+
+.overfooter {
+    min-height: calc(100% - 55px);
+    padding-bottom: 55px;
+}
+
+.nothing {
+    clear: both;
+	display: inline-block;
+	height: 100%;
+	width: 0;
+	vertical-align: middle;
+}
+
+
+header {
+    border: 1px solid #b5b7ba;
+    background-color: #dfdfdf;
+    text-align: left;
+    padding: 10px 0 10px 0;
+}
+
+header table {
+    width: 100%;
+}
+header table td {
+//    border: 1px solid;
+
+    padding: 3px 5px;
+    vertical-align: top;
+
+}
+
+.logo {
+    width: 90px;
+}
+
+.logo img {
+	height: 50px;
+	width: 90px;
+	margin: 0 5px;
+}
+
+.form_reg {
+    width: 160px;
+    text-align: center;
+}
+
+.sign_click {
+    cursor: pointer;
+}
+
+#sign + div, #sign {
+    position: absolute;
+    width: 300px;
+    margin-left: -5000px;
+    border: 1px solid #f3dbdb;
+    -moz-transform: scale(0, 0) rotate(90deg); /* Для Firefox */
+    -ms-transform: scale(0, 0) rotate(90deg); /* Для IE */
+    -webkit-transform: scale(0, 0) rotate(90deg); /* Для Safari, Chrome, iOS */
+    -o-transform: scale(0, 0) rotate(90deg); /* Для Opera */
+    transform: scale(0, 0) rotate(90deg);
+    -webkit-transition: transform 0.9s;
+    -moz-transition: transform 0.9s;
+    -o-transition: transform 0.9s;
+    transition: transform 0.9s;
+    transition: transform 0.9s;
+}
+
+
+#sign:checked + div {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    padding: 4px;
+    background: #ededed;
+    text-align: right;
+    margin-top: 20px;
+    margin-left: 0px;
+    right: 5px;
+    -moz-transform: scale(1, 1) rotate(0deg); /* Для Firefox */
+    -ms-transform: scale(1, 1) rotate(0deg); /* Для IE */
+    -webkit-transform: scale(1, 1) rotate(0deg); /* Для Safari, Chrome, iOS */
+    -o-transform: scale(1, 1) rotate(0deg); /* Для Opera */
+    transform: scale(1, 1) rotate(0deg);
+}
+
+.entry, .registr {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 150px;
+    text-align: left;
+}
+
+.entry p, .registr p, .entry .p {
+    margin: 3px;
+    font-size: 0.8em;
+    text-align: justify;
+}
+
+.entry center:first-child, .registr center:first-child {
+    margin: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.erros_login input {
+    display: none;
+    position: absolute;
+}
+
+.erros_login input + p {
+    display: block;
+    position: absolute;
+    z-index: 2;
+    padding: 4px;
+    background: rgba(237,237,237,0.5);
+    text-align: right;
+    margin-top: 0px;
+    margin-left: 0px;
+    right: 5px;
+    width:200px;
+    color: red;
+    text-align: center;
+}
+
+.erros_login input:checked +p {
+    display: none;
+}
+
+
+.cargo {
+    width: 80px;
+    text-align: center;
+}
+
+
+header .search {
+    padding: 3px 5px;
+    text-align:center;
+    vertical-align: middle;
+}
+
+
+
+
+
+footer {
+    height: 50px;
+    margin-top: -52px;
+    background-color: #dfdfdf;
+    border: 1px solid #b5b7ba;
+    text-align: center;
+    color: #010435;
+    font-size: 20px;
+    font-weight: 100;
+}
+
+footer p {
+	vertical-align: middle;
+    display: inline-block;
+}
+
+footer a {
+    color: inherit;
+}
+
