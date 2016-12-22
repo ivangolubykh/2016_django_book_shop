@@ -4,3 +4,4 @@ from django.shortcuts import render
 
 def main(request):
     return render(request, 'index.html')
+    # return render_to_response('index.html')
