@@ -39,7 +39,24 @@
 				<td class="form_reg">
 					<input type="checkbox" id="sign">
 					<div>
-						101
+						<strong class="entry">
+							<center>Вход в систему.</center>
+							<center>
+								<form>
+									<input type="text" name="login" size="11" placeholder="Логин">
+									<br><input type="password" name="login" size="11" placeholder="Пароль">
+									<br><label><input type="checkbox" name="save"><strong class="p">Запомнить меня</strong></label>
+									<br><input type="submit" value="Войти" size="11">
+								</form>
+							</center>
+
+						</strong><!--
+						--><strong class="registr">
+							<center>Регистрация</center>
+							<p>Первый раз в нашем магазине? Зарегистрируйтесь и получите доступ к расширенным возможностям сайта</p>
+							<br><input type="button" value="Зарегистрироваться" size="11" onclick="javascript:location.href='{% url 'main' %}';">
+						</strong>
+
 					</div>
 					<label class="sign_click" for="sign">Вход/Регистрация</label>
 

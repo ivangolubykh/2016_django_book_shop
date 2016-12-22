@@ -72,8 +72,9 @@ header table td {
 
 #sign + div, #sign {
     position: absolute;
-    max-width: 500px;
+    width: 400px;
     margin: -1000px;
+    border: 1px solid #f3dbdb;
     -moz-transform: scale(0, 0) rotate(90deg); /* Для Firefox */
     -ms-transform: scale(0, 0) rotate(90deg); /* Для IE */
     -webkit-transform: scale(0, 0) rotate(90deg); /* Для Safari, Chrome, iOS */
@@ -95,15 +96,32 @@ header table td {
     background: #ededed;
     text-align: right;
     margin-top: 20px;
-    margin-left: 0px;
+    margin-left: -160px;
     -moz-transform: scale(1, 1) rotate(0deg); /* Для Firefox */
     -ms-transform: scale(1, 1) rotate(0deg); /* Для IE */
     -webkit-transform: scale(1, 1) rotate(0deg); /* Для Safari, Chrome, iOS */
     -o-transform: scale(1, 1) rotate(0deg); /* Для Opera */
     transform: scale(1, 1) rotate(0deg);
 }
+.entry, .registr {
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+    width: 200px;
+    text-align: left;
+}
 
+.entry p, .registr p, .entry .p {
+    margin: 3px;
+    font-size: 0.8em;
+    text-align: justify;
+}
 
+.entry center:first-child, .registr center:first-child {
+    margin: 3px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
 
 
 
