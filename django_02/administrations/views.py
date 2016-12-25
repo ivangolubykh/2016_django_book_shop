@@ -10,7 +10,7 @@ def Admin_Main(request):
     return render(request, 'administrations/admin_base.html', {'users_data': users_data})
 
 
-def Admin_View_User_List(request):
+def Admin_Change_Data(request):
     if request.user.is_authenticated:
         if request.user.is_staff or request.user.is_superuser:
             if request.method == "POST" and request.is_ajax:

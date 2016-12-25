@@ -47,31 +47,28 @@
 			</tr>
 		</table>
 	</header>
-	<article>
+	<article class="content">
+
+		<p>Пароль админских аккаунтов (suser, superuser): q12345678</p>
+		<p>Пароль обычных аккаунтов (usver-01, Usver-02) (8*z): zzzzzzzz</p>
+
 
 	{% if user.is_authenticated %}
-
 		{% if user.is_staff %}
-			<br><br><p>Вы администратор</p><br><br>
+			<p><strong class="change_data" admin_change="userlist">Показать/обновить Список пользователей:</strong></p>
+			<div id="adminDinamo">
+
+				{% include 'administrations/admin_userlist.html' %}
+
+			</div>
 		{% else %}
 			<br><br><p>Вы НЕ администратор</p><br><br>
 		{% endif %}
-
-
-		<p><strong class="change_data" admin_change="userlist">Показать/обновить Список пользователей:</strong></p>
-
-		<div id="adminDinamo">
-
-			{% include 'administrations/admin_userlist.html' %}
-
-		</div>
-
-
-
 	{% else %}
 		<h1>Вход воспрещён.</h1>
 		<p>Пока что тестовый пользователь: suser q12345678</p>
 	{% endif %}
+
 	</article>
 </div>
 <footer>
@@ -83,11 +80,9 @@
 {% block addEndScript %}
 	<script src="{% static 'general/js/jquery.min.js' %}"></script>
 <script>
-	var url_admin_ajax_change_view = '{% url 'view_user_list' %}';
+	var url_admin_ajax_change_view = '{% url 'admin_change_data' %}';
 </script>
 	<script src="{% static 'administrations/static/js/admin_pages.js' %}"></script>
-
-
 {% endblock %}
 
 

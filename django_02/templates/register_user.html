@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block title %}Тестовый магазин книг. Регистрация нового пользователя.{% endblock %}
+
+
+{% block content  %}
+    <p>Введите свои дланные для регистрации:</p>
+    <form method="post" action="{% url 'reguster_user' %}">
+        {% csrf_token %}
+        <table>
+            {% for field in form %}
+                <tr>
+                    <td>
+                        {{ field.label_tag }}
+                        <ul>
+                            {% for error in field.errors %}
+                                <li class="error_registrations">errors:{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {{ field }}
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td align="center" colspan="2"><input type="submit" value="Зарегистрироваться"></td>
+            </tr>
+        </table>
+    </form>
+{% endblock %}>

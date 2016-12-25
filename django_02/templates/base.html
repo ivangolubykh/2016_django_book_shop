@@ -49,17 +49,13 @@
 				<td colspan="3" class="search">Поиск</td>
 			</tr>
 		</table>
-
-
-
-
-
-
 	</header>
-	<article>
+	<article class="content">
 
-		Тут-то всё и будет.
-		<p>Пока что тестовый пользователь: suser q12345678</p>
+		{% block content  %}
+			Тут-то всё и будет.
+			<p>Пока что тестовый пользователь: suser q12345678</p>
+		{% endblock %}
 
 	</article>
 </div>

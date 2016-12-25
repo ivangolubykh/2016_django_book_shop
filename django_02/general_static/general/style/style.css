@@ -163,7 +163,14 @@ header .search {
 }
 
 
+.content p {
+    margin: 5px 3px;
+}
 
+.content td {
+    padding: 2px;
+    vertical-align: middle;
+}
 
 
 footer {
