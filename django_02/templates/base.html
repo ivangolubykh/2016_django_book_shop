@@ -53,7 +53,8 @@
 	<article class="content">
 
 		{% block content  %}
-			Тут-то всё и будет.
+		<p>Тут-то всё и будет.</p>
+		<p>Временная ссылка на админку: <a href="{% url 'admin_main' %}" style="color: blue;">{% url 'admin_main' %}</a></p>
 			<p>Пока что тестовый пользователь: suser q12345678</p>
 		{% endblock %}
 

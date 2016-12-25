@@ -13,6 +13,7 @@ class Add_User_Form(UserCreationForm):
         model = User
         # Типы полей, отображаемых в форме и их порядок отображения в браузере  (поля 'password1', 'password2' и те, что созданв в этом классе выше - есть всегда); поля 'username' и 'email' встроенные:
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        # fields = ('__all__')
 
     def save(self, commit=True):
         user = super(Add_User_Form, self).save(commit=False)
@@ -22,3 +23,23 @@ class Add_User_Form(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class Edit_User_Form(forms.ModelForm):
+    """
+    Форма для обновления данных пользователей. Нужна только для того, чтобы не
+    видеть постоянных ошибок "Не заполнено поле password" при обновлении данных
+    пользователя.^M
+    """
+
+    email = forms.EmailField(required=True, label='E-mail')
+    first_name = forms.CharField(required=False, label='Имя')
+    last_name = forms.CharField(required=False, label='Фамилия')
+
+    class Meta:
+        # Модель (БД) данных, которую используем:
+        model = User
+        # Типы полей, отображаемых в форме и их порядок отображения в браузере  (поля 'password1', 'password2' и те, что созданв в этом классе выше - есть всегда); поля 'username' и 'email' встроенные:
+        # fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name')
+        # fields = ('__all__')

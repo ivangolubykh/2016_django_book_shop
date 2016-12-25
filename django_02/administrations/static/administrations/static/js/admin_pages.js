@@ -1,5 +1,6 @@
 jQuery(document).ready(function ($) {
-    $('.change_data').click(changeView);
+    //'.change_data').click(changeView); // статичный метод
+    $('body').on('click','.change_data',changeView) // Динамичный метод
     function changeView() {
         function getCookie(name) {
             var cookieValue = null;
@@ -17,6 +18,18 @@ jQuery(document).ready(function ($) {
             return cookieValue;
         }
         var csrftoken = getCookie('csrftoken');
+        if ($(this).attr('admin_change') == 'userlist') {
+            var data = {'change_data':$(this).attr('admin_change')};
+        }
+        else if ($(this).attr('admin_change') == 'userinfo') {
+            var data = {'change_data':$(this).attr('admin_change'), 'info_id':$(this).attr('info_id')};
+        }
+        else if ($(this).attr('admin_change') == 'useredit') {
+            var data = jQuery("#"+'edit_user_id').serialize();
+        }
+        else {
+            data = '';
+        }
 
         $.ajax({
             type: "POST",
@@ -24,9 +37,7 @@ jQuery(document).ready(function ($) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             },
             url: url_admin_ajax_change_view,
-            data:{
-                'change_data':$(this).attr('admin_change'),
-            },
+            data: data,
             dataType: "html",
             cache: false,
             success: function(data){

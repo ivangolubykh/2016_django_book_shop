@@ -172,6 +172,9 @@ header .search {
     vertical-align: middle;
 }
 
+.error_registrations {
+    color: maroon;
+}
 
 footer {
     height: 50px;

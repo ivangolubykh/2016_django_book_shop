@@ -15,7 +15,7 @@
     {% for user_data in users_data %}
         <tr>
             <td>{{ user_data.id }}</td>
-            <td><a href="">{{user_data.username }}</a> </td>
+            <td><strong class="change_data" admin_change="userinfo" info_id="{{ user_data.id }}">{{user_data.username }}</strong> </td>
             <td>{{ user_data.last_name }}</td>
             <td>{{ user_data.first_name }}</td>
             <td>{{ user_data.email }}</td>
@@ -52,3 +52,6 @@
     {% endfor %}
 
 </table>
+<script>
+    Start_Ajax_Scan();
+</script>
