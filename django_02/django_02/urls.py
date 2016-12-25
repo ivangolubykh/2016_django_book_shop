@@ -17,7 +17,7 @@ from django.conf.urls import url
 # from django.contrib import admin
 from mainapp.views import Main
 from authorization.views import Login, Logout
-from administrations.views import Admin_Main
+from administrations.views import Admin_Main, Admin_View_User_List
 from django.views.generic.base import RedirectView # для редиректа с главной страницы в папку
 from django.conf.urls import url, include
 
@@ -33,6 +33,7 @@ urlpatterns = [
     ])),
     url(r'^django/profile_ig/test_magazine-01/admin/', include([
         url(r'^$', Admin_Main, name='admin_main'),
+        url(r'^view_user_list/$', Admin_View_User_List, name='view_user_list'),
     ])),
 
 ]

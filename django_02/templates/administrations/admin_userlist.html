@@ -40,8 +40,14 @@
                     нет
                 {% endif %}
             </td>
-            <td>{{ user_data.date_joined|date:'G:i, j E Y tzinfo' }} GMT</td>
-            <td>{{ user_data.last_login|date:'G:i, j E Y' }} GMT</td>
+            <td>{{ user_data.date_joined|date:'G:i, j E Y' }} GMT</td>
+            <td>
+                {% if user_data.last_login %}
+                    {{ user_data.last_login|date:'G:i, j E Y' }} GMT
+                {% else %}
+                    никогда
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 

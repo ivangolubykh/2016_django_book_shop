@@ -58,9 +58,9 @@
 		{% endif %}
 
 
-		<p>Показать Список пользователей:</p>
+		<p><strong class="change_data" admin_change="userlist">Показать/обновить Список пользователей:</strong></p>
 
-		<div class="adminDinamo">
+		<div id="adminDinamo">
 
 			{% include 'administrations/admin_userlist.html' %}
 
@@ -82,6 +82,10 @@
 
 {% block addEndScript %}
 	<script src="{% static 'general/js/jquery.min.js' %}"></script>
+<script>
+	var url_admin_ajax_change_view = '{% url 'view_user_list' %}';
+</script>
+	<script src="{% static 'administrations/static/js/admin_pages.js' %}"></script>
 
 
 {% endblock %}

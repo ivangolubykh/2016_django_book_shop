@@ -20,3 +20,8 @@
 .userlist a:visited {
     color: maroon;
 }
+
+.change_data {
+    cursor: pointer;
+    color: green;
+}
