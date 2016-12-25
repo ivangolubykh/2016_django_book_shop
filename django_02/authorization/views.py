@@ -4,7 +4,7 @@ from django.http import Http404
 
 # Create your views here.
 
-def login(request):
+def Login(request):
     if request.method == 'POST':
         username = request.POST.get('login')
         password = request.POST.get('password')
@@ -22,7 +22,7 @@ def login(request):
 #        raise Http404
         return HttpResponseRedirect("/")
 
-def logout(request):
+def Logout(request):
     auth.logout(request)
     if request.META['HTTP_REFERER']:
         return HttpResponseRedirect(request.META['HTTP_REFERER'])

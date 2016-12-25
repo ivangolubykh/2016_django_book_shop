@@ -15,3 +15,9 @@
 #Восстановление БД:
 #./manage.py loaddata startdata.json
 
+# Создание проекта:
+# django-admin startproject <имя проекта>
+#Создание приложениея:
+# python3 manage.py startapp <название приложения>
+# Создать суперпользователя:
+#./manage.py createsuperuser

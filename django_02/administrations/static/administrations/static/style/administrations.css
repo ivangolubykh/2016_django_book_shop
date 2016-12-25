@@ -1,0 +1,22 @@
+.userlist {
+	margin: 5px auto;
+
+}
+
+.userlist tr:first-child {
+	font-weight: bold;
+}
+
+.userlist td {
+	border: 1px solid black;
+	text-align: center;
+	padding: 3px;
+}
+
+.userlist a {
+    color: blue;
+}
+
+.userlist a:visited {
+    color: maroon;
+}
