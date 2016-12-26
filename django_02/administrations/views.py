@@ -47,6 +47,21 @@ def Admin_Change_Data(request):
                         return HttpResponse('Данные успешно отредактированы.', content_type='text/html; charset=utf-8', charset='utf-8')
                     else:
                         return render(request, 'administrations/admin_useredit.html', {'form': form, 'id': request.POST['id'], 'errors': form.errors})
+                elif change_data == 'userdelete':
+                    try:
+                        del_id = request.POST['del_id']
+                    except:
+                        del_id = ''
+                    if del_id:
+                        user = get_object_or_404(User, id=del_id)
+                        if user:
+                            user.delete()
+                            return HttpResponse('Данные успешно удалены.', content_type='text/html; charset=utf-8', charset='utf-8')
+                        else:
+                            return HttpResponse('Ошибка: Такого пользователя итак нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                    else:
+                        return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
+                        # 004 - Ошибка: передан некорректный id (или не передан вовсе).
 
                 else:
                     return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')

@@ -25,3 +25,7 @@
     cursor: pointer;
     color: green;
 }
+
+.userdelete {
+    color: red;
+}
