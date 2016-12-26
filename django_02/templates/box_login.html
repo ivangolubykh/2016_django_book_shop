@@ -16,14 +16,14 @@
     --><strong class="registr">
         <center>Регистрация</center>
         <p>Первый раз в нашем магазине? Зарегистрируйтесь и получите доступ к расширенным возможностям сайта</p>
-    <center><input type="button" value="Регистрация" size="11" onclick="javascript:location.href='{% url 'reguster_user' %}';"></center>
+    <center><input type="button" value="Регистрация" size="11" onclick="javascript:location.href='{% url 'register_user' %}';"></center>
     </strong>
 
 </div>
 {% if user.is_authenticated %}
     <form action="{% url 'logout' %}">
         {% csrf_token %}
-        <input type="submit" value="Разлогиниться">
+        {{ user }} <input type="submit" value="Разлогиниться">
     </form>
 {% else %}
     <label class="sign_click" for="sign">Вход/Регистрация</label>

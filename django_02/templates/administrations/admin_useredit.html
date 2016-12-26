@@ -1,36 +1,76 @@
 
 <p>Сведения о пользователе:</p>
-<form id="edit_user_id" method="post" action="{% url 'reguster_user' %}">
-    {% csrf_token %}
-    <input type="hidden" name="id" value="{{id}}">
-    <input type="hidden" name="change_data" value="useredit">
 
-    {{ form1 }}
 
     <table>
-        {% for field in form %}
-            <tr>
-                <td>
-                    {{ field.label_tag }}
-                    <ul>
-                        {% for error in field.errors %}
-                            <li class="error_registrations">Ошибка: {{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>
-                <td>
-                    {{ field }}
-                </td>
-            </tr>
-        {% endfor %}
-        <tr>
-            <td align="center" colspan="2"><input class="change_data" admin_change="useredit" type="button" value="Редактировать"></td>
-        </tr>
-        <tr>
-            <td align="left" colspan="2"><input class="change_data userdelete" admin_change="userdelete" del_id="{{id}}" type="button" value="Удалить пользователя"></td>
-        </tr>
+        <tr><td width="50%">
+
+            <form id="edit_user_id" method="post" action="{% url 'register_user' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="hidden" name="change_data" value="useredit">
+            <table>
+                {% for field in form %}
+                    <tr>
+                        <td>
+                            {{ field.label_tag }}
+                            <ul>
+                                {% for error in field.errors %}
+                                    <li class="error_registrations">Ошибка: {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            {{ field }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td align="center" colspan="2"><input class="change_data" admin_change="useredit" type="button" value="Редактировать"></td>
+                </tr>
+                <tr>
+                    <td align="left" colspan="2"><input class="change_data userdelete" admin_change="userdelete" del_id="{{id}}" type="button" value="Удалить пользователя">
+                    </td>
+                </tr>
+            </table>
+            </form>
+
+        </td>
+        <td width="50%">
+
+            <form id="edit_user_id_passw" method="post" action="{% url 'register_user' %}">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{id}}">
+            <input type="hidden" name="change_data" value="useredit_passw">
+            <table>
+                <tr>
+                    <td colspan="2">
+                        Изменить пароль пользователя:
+                    </td>
+                </tr>
+                {% for field in formpassw %}
+                    <tr>
+                        <td>
+                            {{ field.label_tag }}
+                            <ul>
+                                {% for error in field.errors %}
+                                    <li class="error_registrations">Ошибка: {{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>
+                            {{ field }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td align="center" colspan="2"><input class="change_data" admin_change="useredit_passw" type="button" value="Изменить пароль пользователя"></td>
+                </tr>
+            </table>
+            </form>
+
+        </td></tr>
     </table>
-</form>
 
 
 {% load staticfiles %}

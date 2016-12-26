@@ -30,6 +30,9 @@ jQuery(document).ready(function ($) {
         else if ($(this).attr('admin_change') == 'userdelete') {
             var data = {'change_data':$(this).attr('admin_change'), 'del_id':$(this).attr('del_id')};
         }
+        else if ($(this).attr('admin_change') == 'useredit_passw') {
+            var data = jQuery("#"+'edit_user_id_passw').serialize();
+        }
         else {
             data = '';
         }

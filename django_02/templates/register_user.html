@@ -6,7 +6,7 @@
 
 {% block content  %}
     <p>Введите свои дланные для регистрации:</p>
-    <form method="post" action="{% url 'reguster_user' %}">
+    <form method="post" action="{% url 'register_user`' %}">
         {% csrf_token %}
         <table>
             {% for field in form %}

@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 
 # Create your views here.
 from django.http import HttpResponse
-from mainapp.forms import Add_User_Form, Edit_User_Form
+from mainapp.forms import Add_User_Form, Edit_User_Form, Edit_User_Passw
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
-from django.http import Http404, JsonResponse
-from django.template import loader
+#from django.http import Http404, JsonResponse
+#from django.template import loader
 
 
 def Admin_Main(request):
@@ -36,17 +36,27 @@ def Admin_Change_Data(request):
                     except:
                         info_id = ''
                     user = get_object_or_404(User, id=info_id)
-                    user_id_form = Add_User_Form(instance=user)
-                    return render(request, 'administrations/admin_useredit.html', {'form': user_id_form, 'id': info_id})
+                    return render(request, 'administrations/admin_useredit.html', {'form': Edit_User_Form(instance=user), 'formpassw': Edit_User_Passw(user), 'id': info_id})
                 elif change_data == 'useredit':
-                    form = get_object_or_404(User, id=request.POST['id'])
-                    # form1 = User.objects.get(pk=request.POST['id'])
-                    form = Edit_User_Form(request.POST or None, instance=form)
+                    user = get_object_or_404(User, id=request.POST['id'])
+                    form = Edit_User_Form(request.POST or None, instance=user)
                     if form.is_valid():
                         form.save()
                         return HttpResponse('Данные успешно отредактированы.', content_type='text/html; charset=utf-8', charset='utf-8')
                     else:
-                        return render(request, 'administrations/admin_useredit.html', {'form': form, 'id': request.POST['id'], 'errors': form.errors})
+                        return render(request, 'administrations/admin_useredit.html', {'form': form, 'id': request.POST['id'], 'errors': form.errors, 'formpassw': Edit_User_Passw(user)})
+                elif change_data == 'useredit_passw':
+                    form = get_object_or_404(User, id=request.POST['id'])
+                    form = Edit_User_Form(instance=form)
+                    # formpassw = User.objects.get(id=request.POST['id'])
+                    formpassw = get_object_or_404(User, id=request.POST['id'])
+                    formpassw = Edit_User_Passw(formpassw, request.POST or None)
+                    if formpassw.is_valid():
+                        formpassw.save()
+                        return HttpResponse('Пароль отредактирован.', content_type='text/html; charset=utf-8', charset='utf-8')
+                    else:
+                        return render(request, 'administrations/admin_useredit.html', {'form': form, 'id': request.POST['id'], 'errors_passw': formpassw.errors, 'formpassw': formpassw})
+
                 elif change_data == 'userdelete':
                     try:
                         del_id = request.POST['del_id']
