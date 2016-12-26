@@ -1,0 +1,57 @@
+<table class="userlist">
+    <tr>
+        <td>id</td>
+        <td>username</td>
+        <td>Фамилия</td>
+        <td>Имя</td>
+        <td>E-mail</td>
+        <td>Действующий?</td>
+        <td>Доступ к админке</td>
+        <td>Суперпользователь</td>
+        <td>Дата создания</td>
+        <td>Последний вход</td>
+    </tr>
+
+    {% for user_data in users_data %}
+        <tr>
+            <td>{{ user_data.id }}</td>
+            <td><strong class="change_data" admin_change="userinfo" info_id="{{ user_data.id }}">{{user_data.username }}</strong> </td>
+            <td>{{ user_data.last_name }}</td>
+            <td>{{ user_data.first_name }}</td>
+            <td>{{ user_data.email }}</td>
+            <td>
+                {% if user_data.is_active %}
+                    да
+                {% else %}
+                    нет
+                {% endif %}
+            </td>
+            <td>
+                {% if user_data.is_staff %}
+                    да
+                {% else %}
+                    нет
+                {% endif %}
+            </td>
+            <td>
+                {% if user_data.is_superuser %}
+                    да
+                {% else %}
+                    нет
+                {% endif %}
+            </td>
+            <td>{{ user_data.date_joined|date:'G:i, j E Y' }} GMT</td>
+            <td>
+                {% if user_data.last_login %}
+                    {{ user_data.last_login|date:'G:i, j E Y' }} GMT
+                {% else %}
+                    никогда
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+
+</table>
+<script>
+    Start_Ajax_Scan();
+</script>

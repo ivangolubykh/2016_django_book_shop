@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 # from django.contrib import admin
-from mainapp.views import *
-from authorization.views import *
+from mainapp.views import Main, Register_User
+from authorization.views import Login, Logout
+from administrations.views import Admin_Main, Admin_Change_Data
 from django.views.generic.base import RedirectView # для редиректа с главной страницы в папку
 from django.conf.urls import url, include
 
@@ -26,10 +27,14 @@ urlpatterns = [
 #    url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='django/profile_ig/test_magazine-01/')), # редирект с главной страницы в папку
     url(r'^django/profile_ig/test_magazine-01/', include([
-        url(r'^$', main, name='main'),
-        url(r'^login/$', login, name='login'),
-        url(r'^logout/$', logout, name='logout'),
+        url(r'^$', Main, name='main'),
+        url(r'^login/$', Login, name='login'),
+        url(r'^logout/$', Logout, name='logout'),
+        url(r'^registration/$', Register_User, name='register_user'),
     ])),
-
+    url(r'^django/profile_ig/test_magazine-01/admin/', include([
+        url(r'^$', Admin_Main, name='admin_main'),
+        url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
+    ])),
 
 ]

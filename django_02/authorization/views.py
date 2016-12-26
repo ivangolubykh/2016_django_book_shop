@@ -1,10 +1,12 @@
 from django.contrib import auth
-from django.shortcuts import render, HttpResponseRedirect
-from django.http import Http404
 
 # Create your views here.
+from django.shortcuts import render
+from general_function.general_function import Return_to_back
+from django.http import Http404
 
-def login(request):
+
+def Login(request):
     if request.method == 'POST':
         username = request.POST.get('login')
         password = request.POST.get('password')
@@ -12,19 +14,13 @@ def login(request):
 #        if user is not None:
         if user:
             auth.login(request, user)
-            if request.META['HTTP_REFERER']:
-                return HttpResponseRedirect(request.META['HTTP_REFERER'])
-            else:
-                return HttpResponseRedirect("/")
+            return Return_to_back(request)
         else:
             return render(request, 'index.html', {'erros': 'true'})
     else:
 #        raise Http404
-        return HttpResponseRedirect("/")
+        return Return_to_back(request)
 
-def logout(request):
+def Logout(request):
     auth.logout(request)
-    if request.META['HTTP_REFERER']:
-        return HttpResponseRedirect(request.META['HTTP_REFERER'])
-    else:
-        return HttpResponseRedirect("/")
+    return Return_to_back(request)

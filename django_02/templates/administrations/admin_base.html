@@ -4,6 +4,9 @@
 <head>
 	<title>{% block title %}{% endblock %}</title>
 	<meta charset="utf-8">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="{% static 'general/favicon/ms-icon-144x144.png' %}">
+	<meta name="theme-color" content="#ffffff">
 	<link rel="apple-touch-icon" sizes="57x57" href="{% static 'general/favicon/apple-icon-57x57.png' %}">
 	<link rel="apple-touch-icon" sizes="60x60" href="{% static 'general/favicon/apple-icon-60x60.png' %}">
 	<link rel="apple-touch-icon" sizes="72x72" href="{% static 'general/favicon/apple-icon-72x72.png' %}">
@@ -18,12 +21,10 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="{% static 'general/favicon/favicon-96x96.png' %}">
 	<link rel="icon" type="image/png" sizes="16x16" href="{% static 'general/favicon/favicon-16x16.png' %}">
 	<link rel="manifest" href="{% static 'general/favicon/manifest.json' %}">
-	<meta name="msapplication-TileColor" content="#ffffff">
-	<meta name="msapplication-TileImage" content="{% static 'general/favicon/ms-icon-144x144.png' %}">
-	<meta name="theme-color" content="#ffffff">
+
 	<link rel="stylesheet" href="{% static 'general/style/reset.css' %}">
 	<link rel="stylesheet" href="{% static 'general/style/style.css' %}">
-
+	<link rel="stylesheet" href="{% static 'administrations/static/style/administrations.css' %}">
 </head>
 <body>
 <div class="overfooter">
@@ -32,17 +33,13 @@
 			<tr>
 				<td rowspan="2" class="logo"><a href="{% url 'main' %}"><img title="Главная" src="{% static 'general/logo-01.png' %}"></a></td>
 				<td>
-					<label><a href="{% url 'main' %}">Жанры</a></label>
-					<a href="{% url 'main' %}">Доставка</a>
-					<a href="{% url 'main' %}">Способы оплаты</a>
+					<a href="{% url 'main' %}">Главная страница сайта</a>
+					<a href="{% url 'admin_main' %}">Главная страница админки</a>
 				</td>
 				<td class="form_reg">
 
 					{% include 'box_login.html' %}
 
-				</td>
-				<td class="cargo">
-					<a href="#">Корзина</a>
 				</td>
 			</tr>
 			<tr>
@@ -52,11 +49,25 @@
 	</header>
 	<article class="content">
 
-		{% block content  %}
-		<p>Тут-то всё и будет.</p>
-		<p>Временная ссылка на админку: <a href="{% url 'admin_main' %}" style="color: blue;">{% url 'admin_main' %}</a></p>
-			<p>Пока что тестовый пользователь: suser q12345678</p>
-		{% endblock %}
+		<p>Пароль админских аккаунтов (suser, superuser): q12345678</p>
+		<p>Пароль обычных аккаунтов (usver-01, Usver-02) (8*z): zzzzzzzz</p>
+
+
+	{% if user.is_authenticated %}
+		{% if user.is_staff %}
+			<p><strong class="change_data" admin_change="userlist">Показать/обновить Список пользователей:</strong></p>
+			<div id="adminDinamo">
+
+				{% include 'administrations/admin_userlist.html' %}
+
+			</div>
+		{% else %}
+			<br><br><p>Вы НЕ администратор</p><br><br>
+		{% endif %}
+	{% else %}
+		<h1>Вход воспрещён.</h1>
+		<p>Пока что тестовый пользователь: suser q12345678</p>
+	{% endif %}
 
 	</article>
 </div>
@@ -64,6 +75,16 @@
 	<div class="nothing"></div><!--
 	--><p>Copyright © 2016, Иван Борисович Голубых</p>
 </footer>
+
+
+{% block addEndScript %}
+	<script src="{% static 'general/js/jquery.min.js' %}"></script>
+<script>
+	var url_admin_ajax_change_view = '{% url 'admin_change_data' %}';
+</script>
+	<script src="{% static 'administrations/static/js/admin_pages.js' %}"></script>
+{% endblock %}
+
 
 </body>
 </html>
