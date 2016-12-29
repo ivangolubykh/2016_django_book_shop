@@ -98,23 +98,12 @@ def Admin_Books(request):
                     return HttpResponse('Ошибка: 001', content_type='text/html; charset=utf-8')
                     # 001 - Ошибка запроса. Нет change_data
                 if change_data  == 'book_author_list':
+                    add_form = Edit_Book_Author(request.POST)
+                    if add_form.is_valid():
+                        add_form.save()
+                        return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': Edit_Book_Author(), 'author_list': authors})
+                    return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': add_form, 'author_list': authors})
 
-                    try:
-                        id = request.POST['author_id']
-                    except:
-                        id = 0
-
-                    if id == 0:  # Создаём нового автора
-                        add_form = Edit_Book_Author(request.POST)
-                        if add_form.is_valid():
-                            add_form.save()
-                            return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': Edit_Book_Author(), 'author_list': authors})
-
-
-                        return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': add_form, 'author_list': authors})
-
-                    else:
-                        pass
 
 
 
