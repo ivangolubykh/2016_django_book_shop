@@ -59,6 +59,11 @@ jQuery(document).ready(function ($) {
             var ajax_url = url_admin_ajax_books;
             var change_id='book_author_id='+$(this).attr('author_id');
         }
+        else if ($(this).attr('admin_change') == 'book_author_deleted') {
+            var data = {'change_data':$(this).attr('admin_change'), 'author_id':$(this).attr('author_id')};
+            var ajax_url = url_admin_ajax_books;
+            var change_id='book_author_id='+$(this).attr('author_id');
+        }
 
         else {
             data = '';

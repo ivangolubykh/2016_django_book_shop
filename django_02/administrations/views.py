@@ -76,7 +76,7 @@ def Admin_Change_Data(request):
 
                 else:
                     return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')
-                    # 002 - Ошибка запроса. work_count недопустимый
+                    # 002 - Ошибка запроса. change_data недопустимая
             else:
                 return HttpResponse('Ошибка: 003', content_type='text/html; charset=utf-8')
                 # 003 - Ошибка: Не ajax или не POST
@@ -126,7 +126,27 @@ def Admin_Books(request):
                         return render(request, 'administrations/admin_box_books_author_info.html', {'author': author})
                     else:
                         return render(request, 'administrations/admin_box_books_author_editing.html', {'form_author_edit': Edit_Book_Author(instance=author_editing), 'id': edit_id})
+                elif change_data == 'book_author_deleted':
+                    try:
+                        del_id = request.POST['author_id']
+                    except:
+                        del_id = ''
+                    if del_id:
+                        user = get_object_or_404(Books_Author, id=del_id)
+                        if user:
+                            user.delete()
+                            return HttpResponse('Автор удалён успешно.', content_type='text/html; charset=utf-8', charset='utf-8')
+                        else:
+                            return HttpResponse('Ошибка: Такого автора итак нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                    else:
+                        return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
+                        # 004 - Ошибка: передан некорректный id (или не передан вовсе).
 
+
+
+                else:
+                    return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')
+                    # 002 - Ошибка запроса. change_data недопустимая
 
 
 

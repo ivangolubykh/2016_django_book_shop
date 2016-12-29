@@ -3,19 +3,19 @@
     {% csrf_token %}
     <p>Редактировать автора:
 
-    {% if form_author_edit.errors %}
-    <ul>
-        {% for errorkey in form_author_edit.errors.items %}
-            <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
+        {% if form_author_edit.errors %}
+        <ul>
+            {% for errorkey in form_author_edit.errors.items %}
+                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
 
-    {{ form_author_edit.baauthor }}
+        {{ form_author_edit.baauthor }}
 
-    <input type="hidden" name="author_id" value="{{ id }}">
-    <input type="hidden" name="change_data" value="book_author_end_edit" author_id="{{ id }}">
-    <input class="change_data" admin_change="book_author_end_edit" type="button" author_id="{{ id }}" value="Отредактировать автора"></p>
-
-
+        <input type="hidden" name="author_id" value="{{ id }}">
+        <input type="hidden" name="change_data" value="book_author_end_edit" author_id="{{ id }}">
+        <input class="change_data" admin_change="book_author_end_edit" type="button" author_id="{{ id }}" value="Отредактировать автора">
+        <input class="change_data userdelete" admin_change="book_author_deleted" type="button" author_id="{{ id }}" value="Удалить автора">
+    </p>
 </form>
