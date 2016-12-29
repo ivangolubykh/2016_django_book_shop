@@ -15,26 +15,33 @@ Including another URLconf
 """
 from django.conf.urls import url
 # from django.contrib import admin
-from mainapp.views import Main, Register_User
+from mainapp.views import Main, Register_User, List_Books
 from authorization.views import Login, Logout
-from administrations.views import Admin_Main, Admin_Change_Data
+from administrations.views import Admin_Main, Admin_Change_Data, Admin_Books
 from django.views.generic.base import RedirectView # для редиректа с главной страницы в папку
 from django.conf.urls import url, include
 
 
+starturl = r'^django/profile_ig/test_magazine-01/'
 
 urlpatterns = [
 #    url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='django/profile_ig/test_magazine-01/')), # редирект с главной страницы в папку
-    url(r'^django/profile_ig/test_magazine-01/', include([
+    url(starturl, include([
         url(r'^$', Main, name='main'),
         url(r'^login/$', Login, name='login'),
         url(r'^logout/$', Logout, name='logout'),
         url(r'^registration/$', Register_User, name='register_user'),
     ])),
-    url(r'^django/profile_ig/test_magazine-01/admin/', include([
+    url(starturl + 'admin/', include([
         url(r'^$', Admin_Main, name='admin_main'),
         url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
+        url(r'^books/$', Admin_Books, name='admin_book'),
     ])),
+]
 
+urlpatterns += [
+    url(starturl, include([
+        url(r'^book/([\d+])/$', List_Books, name='book'),
+    ])),
 ]

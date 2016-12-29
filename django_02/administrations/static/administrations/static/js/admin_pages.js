@@ -20,37 +20,54 @@ jQuery(document).ready(function ($) {
         var csrftoken = getCookie('csrftoken');
         if ($(this).attr('admin_change') == 'userlist') {
             var data = {'change_data':$(this).attr('admin_change')};
+            var ajax_url = url_admin_ajax_change_view;
         }
         else if ($(this).attr('admin_change') == 'userinfo') {
             var data = {'change_data':$(this).attr('admin_change'), 'info_id':$(this).attr('info_id')};
+            var ajax_url = url_admin_ajax_change_view;
         }
         else if ($(this).attr('admin_change') == 'useredit') {
             var data = jQuery("#"+'edit_user_id').serialize();
+            var ajax_url = url_admin_ajax_change_view;
         }
         else if ($(this).attr('admin_change') == 'userdelete') {
             var data = {'change_data':$(this).attr('admin_change'), 'del_id':$(this).attr('del_id')};
+            var ajax_url = url_admin_ajax_change_view;
         }
         else if ($(this).attr('admin_change') == 'useredit_passw') {
             var data = jQuery("#"+'edit_user_id_passw').serialize();
+            var ajax_url = url_admin_ajax_change_view;
         }
+
+        else if ($(this).attr('admin_change') == 'book_author_list') {
+            var data = jQuery("#"+'book_author_list').serialize();
+            var ajax_url = url_admin_ajax_books;
+        }
+        else if ($(this).attr('admin_change') == 'book_author_list2') {
+            var data = {'change_data':$(this).attr('admin_change'), 'author_id':$(this).attr('author_id')};
+            var ajax_url = url_admin_ajax_books;
+        }
+
         else {
             data = '';
+            var ajax_url = url_admin_ajax_change_view;
         }
+
 
         $.ajax({
             type: "POST",
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("X-CSRFToken", csrftoken);
             },
-            url: url_admin_ajax_change_view,
+            url: ajax_url,
             data: data,
             dataType: "html",
             cache: false,
             success: function(data){
                 document.getElementById('adminDinamo').innerHTML = data;
-                if (data == 'ok'){
-                    location.reload();
-                }
+//                if (data == 'ok'){
+//                    location.reload();
+//                }
             }
        });
     }

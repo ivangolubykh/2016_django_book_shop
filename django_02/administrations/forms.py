@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
+from mainapp.models import Books_Categories, Books, Books_Author
 
 
 
@@ -51,3 +52,10 @@ class Edit_User_Passw(SetPasswordForm):
         # fields = ('username', 'is_superuser', 'is_staff', 'email', 'first_name', 'last_name', 'password')
         fields = ('__all__')
 
+
+class Edit_Book_Author(forms.ModelForm):
+    class Meta:
+        # Модель (БД) данных, которую используем:
+        model = Books_Author
+        # Типы полей, отображаемых в форме
+        fields = ('__all__')

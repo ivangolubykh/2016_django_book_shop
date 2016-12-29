@@ -1,10 +1,11 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
-
-# Create your views here.
 from django.http import HttpResponse
-from mainapp.forms import Add_User_Form, Edit_User_Form, Edit_User_Passw
-from django.shortcuts import get_object_or_404, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
+
+from administrations.forms import Edit_User_Form, Edit_User_Passw, Edit_Book_Author
+from mainapp.models import Books_Author
+
 #from django.http import Http404, JsonResponse
 #from django.template import loader
 
@@ -83,5 +84,54 @@ def Admin_Change_Data(request):
             return HttpResponse('Ошибка: У вас нет права администрировать.', content_type='text/html; charset=utf-8')
     else:
         return HttpResponse('Ошибка: Вы не авторизованы', content_type='text/html; charset=utf-8', charset='utf-8')
+
+
+
+def Admin_Books(request):
+    if request.user.is_authenticated:
+        if request.user.is_staff or request.user.is_superuser:
+            authors = Books_Author.objects.order_by('baauthor')
+            if request.method == "POST" and request.is_ajax:
+                try:
+                    change_data = request.POST['change_data']
+                except:
+                    return HttpResponse('Ошибка: 001', content_type='text/html; charset=utf-8')
+                    # 001 - Ошибка запроса. Нет change_data
+                if change_data  == 'book_author_list':
+
+                    try:
+                        id = request.POST['author_id']
+                    except:
+                        id = 0
+
+                    if id == 0:  # Создаём нового автора
+                        add_form = Edit_Book_Author(request.POST)
+                        if add_form.is_valid():
+                            add_form.save()
+                            return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': Edit_Book_Author(), 'author_list': authors})
+
+
+                        return render(request, 'administrations/admin_box_books_list.html', {'form_author_add': add_form, 'author_list': authors})
+
+                    else:
+                        pass
+
+
+
+
+
+
+
+
+
+            else:
+                return render(request, 'administrations/adminn_books.html', {'form_author_add': Edit_Book_Author(), 'author_list': authors})
+        else:
+            return HttpResponse('Ошибка: У вас нет права администрировать.', content_type='text/html; charset=utf-8')
+    else:
+        return HttpResponse('Ошибка: Вы не авторизованы', content_type='text/html; charset=utf-8', charset='utf-8')
+
+
+
 
 
