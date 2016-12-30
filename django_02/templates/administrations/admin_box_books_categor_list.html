@@ -1,6 +1,6 @@
 <form method="post" id="book_categor_list">
     {% csrf_token %}
-    <p><strong class="change_data" admin_change="book_categor_stop_edit" categor_id="{{ categor.id }}">Добавить категорию:</strong></p>
+    <center>Добавить категорию:</center>
     <table class="userlist">
         {% for categor in form_categor_add %}
             <tr>
