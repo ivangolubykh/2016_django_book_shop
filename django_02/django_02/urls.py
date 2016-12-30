@@ -17,7 +17,7 @@ from django.conf.urls import url
 # from django.contrib import admin
 from mainapp.views import Main, Register_User, List_Books
 from authorization.views import Login, Logout
-from administrations.views import Admin_Main, Admin_Change_Data, Admin_Books
+from administrations.views import Admin_Main, Admin_Change_Data, Admin_Books_Authors
 from django.views.generic.base import RedirectView # для редиректа с главной страницы в папку
 from django.conf.urls import url, include
 
@@ -36,7 +36,7 @@ urlpatterns = [
     url(starturl + 'admin/', include([
         url(r'^$', Admin_Main, name='admin_main'),
         url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
-        url(r'^books/$', Admin_Books, name='admin_book'),
+        url(r'^books/$', Admin_Books_Authors, name='admin_book_author'),
     ])),
 ]
 

@@ -35,7 +35,7 @@
 				<td>
 					<a href="{% url 'main' %}">Главная страница сайта</a>
 					<a href="{% url 'admin_main' %}">Главная страница админки</a>
-					<a href="{% url 'admin_book' %}">Админка Книг</a>
+					<a href="{% url 'admin_book_author' %}">Админка Авторов Книг</a>
 				</td>
 				<td class="form_reg">
 
@@ -87,7 +87,7 @@
 	<script src="{% static 'general/js/jquery.min.js' %}"></script>
 <script>
 	var url_admin_ajax_change_view = '{% url 'admin_change_data' %}';
-	var url_admin_ajax_books = '{% url 'admin_book' %}';
+	var url_admin_ajax_books = '{% url 'admin_book_author' %}';
 </script>
 	<script src="{% static 'administrations/static/js/admin_pages.js' %}"></script>
 {% endblock %}

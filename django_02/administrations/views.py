@@ -91,7 +91,9 @@ def Admin_Change_Data(request):
             # 003 - Ошибка: Не ajax или не POST
 
 
-def Admin_Books(request):
+
+
+def Admin_Books_Authors(request):
     if Veryfy_Admin_Autorizations(request):
         authors = Books_Author.objects.order_by('baauthor')
         if request.method == "POST" and request.is_ajax:
