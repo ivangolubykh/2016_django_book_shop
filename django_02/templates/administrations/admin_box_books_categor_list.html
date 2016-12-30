@@ -32,11 +32,13 @@
     <center>Список категорий:</center>
     <table class="userlist">
         <tr>
-            {% for categor in form_categor_add %}
-                <td>{{ categor.label_tag }}</td>
-            {% endfor %}
+            <td>
+               {{ form_categor_add.bcname.label_tag }}
+            </td>
+            <td>
+               {{ form_categor_add.bcdescr.label_tag }}
+            </td>
         </tr>
-
         {% for categor in categor_list %}
             <tr  id="book_categor_id_{{ categor.id }}">
                 {% include 'administrations/admin_box_books_categor_info.html' %}

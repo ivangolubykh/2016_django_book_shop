@@ -133,7 +133,7 @@ def Admin_Books_Authors(request):
                     author = Books_Author.objects.values('id', 'baauthor').get(id=edit_id)
                     return render(request, 'administrations/admin_box_books_author_info.html', {'author': author})
                 else:
-                    return render(request, 'administrations/admin_box_books_author_editing.html', {'form_author_edit': Edit_Book_Author(instance=author_editing), 'id': edit_id})
+                    return render(request, 'administrations/admin_box_books_author_editing.html', {'form_author_edit': form, 'id': edit_id})
 
             elif change_data == 'book_author_deleted':
                 try:
@@ -192,62 +192,58 @@ def Admin_Books_Categories(request):
                     return render(request, 'administrations/admin_box_books_categor_list.html', {'form_categor_add': Edit_Book_Categories(), 'categor_list': categories})
                 return render(request, 'administrations/admin_box_books_categor_list.html', {'form_categor_add': add_form, 'categor_list': categories})
 
-
-
-
-
-            elif change_data == 'book_author_start_edit':
+            elif change_data == 'book_categor_start_edit':
                 try:
-                    edit_id = request.POST['author_id']
+                    edit_id = request.POST['categor_id']
                 except:
-                    return HttpResponse('Ошибка: 005', content_type='text/html; charset=utf-8')
-                    # 005 - Ошибка запроса. Нет author_id
-                author = get_object_or_404(Books_Author, id=edit_id)
+                    return HttpResponse('Ошибка: 006', content_type='text/html; charset=utf-8')
+                    # 006 - Ошибка запроса. Нет categor_id
+                categor = get_object_or_404(Books_Categories, id=edit_id)
 
-                return render(request, 'administrations/admin_box_books_author_editing.html', {'form_author_edit': Edit_Book_Categories(instance=author), 'id': edit_id})
+                return render(request, 'administrations/admin_box_books_categor_editing.html', {'form_categor_edit': Edit_Book_Categories(instance=categor), 'id': edit_id})
 
-            elif change_data == 'book_author_end_edit':
+            elif change_data == 'book_categor_end_edit':
                 try:
-                    edit_id = request.POST['author_id']
+                    edit_id = request.POST['categor_id']
                 except:
-                    return HttpResponse('Ошибка: 005', content_type='text/html; charset=utf-8')
-                    # 005 - Ошибка запроса. Нет author_id
-                author_editing = get_object_or_404(Books_Author, id=edit_id)
-                form = Edit_Book_Categories(request.POST or None, instance=author_editing)
+                    return HttpResponse('Ошибка: 006', content_type='text/html; charset=utf-8')
+                    # 006 - Ошибка запроса. Нет categor_id
+                categor_editing = get_object_or_404(Books_Categories, id=edit_id)
+                form = Edit_Book_Categories(request.POST or None, instance=categor_editing)
                 if form.is_valid():
                     form.save()
-                    author = Books_Author.objects.values('id', 'baauthor').get(id=edit_id)
-                    return render(request, 'administrations/admin_box_books_author_info.html', {'author': author})
+                    categor = Books_Categories.objects.values('id', 'bcname', 'bcdescr').get(id=edit_id)
+                    return render(request, 'administrations/admin_box_books_categor_info.html', {'categor': categor})
                 else:
-                    return render(request, 'administrations/admin_box_books_author_editing.html', {'form_author_edit': Edit_Book_Categories(instance=author_editing), 'id': edit_id})
+                    return render(request, 'administrations/admin_box_books_categor_editing.html', {'form_categor_edit': form, 'id': edit_id})
 
-            elif change_data == 'book_author_deleted':
+            elif change_data == 'book_categor_deleted':
                 try:
-                    del_id = request.POST['author_id']
+                    del_id = request.POST['categor_id']
                 except:
                     del_id = ''
                 if del_id:
-                    user = get_object_or_404(Books_Author, id=del_id)
+                    user = get_object_or_404(Books_Categories, id=del_id)
                     if user:
                         user.delete()
-                        return HttpResponse('Автор удалён успешно.', content_type='text/html; charset=utf-8', charset='utf-8')
+                        return HttpResponse('Категория удалена успешно.', content_type='text/html; charset=utf-8', charset='utf-8')
                     else:
-                        return HttpResponse('Ошибка: Такого автора итак нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                        return HttpResponse('Ошибка: Такой категории в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
                 else:
                     return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
                     # 004 - Ошибка: передан некорректный id (или не передан вовсе).
 
-            elif change_data == 'book_author_stop_edit':
+            elif change_data == 'book_categor_stop_edit':
                 try:
-                    stop_ediy_id = request.POST['author_id']
+                    stop_edit_id = request.POST['categor_id']
                 except:
-                    stop_ediy_id = ''
-                if stop_ediy_id:
-                    author = Books_Author.objects.values('id', 'baauthor').get(id=stop_ediy_id)
-                    if author:
-                        return render(request, 'administrations/admin_box_books_author_info.html', {'author': author})
+                    stop_edit_id = ''
+                if stop_edit_id:
+                    categor = Books_Categories.objects.values('id', 'bcname', 'bcdescr').get(id=stop_edit_id)
+                    if categor:
+                        return render(request, 'administrations/admin_box_books_categor_info.html', {'categor': categor})
                     else:
-                        return HttpResponse('Ошибка: Такого автора итак нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                        return HttpResponse('Ошибка: Такой категории нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
                 else:
                     return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
                     # 004 - Ошибка: передан некорректный id (или не передан вовсе).
@@ -255,10 +251,6 @@ def Admin_Books_Categories(request):
             else:
                 return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')
                 # 002 - Ошибка запроса. change_data недопустимая
-
-
-
-
         else:
             return render(request, 'administrations/adminn_books_categor.html', {'form_categor_add': Edit_Book_Categories(), 'categor_list': categories})
 

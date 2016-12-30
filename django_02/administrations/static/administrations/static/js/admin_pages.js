@@ -76,6 +76,26 @@ jQuery(document).ready(function ($) {
             var ajax_url = url_admin_ajax_books_categor;
             var change_id = 'adminDinamo';
         }
+        else if ($(this).attr('admin_change') == 'book_categor_start_edit') {
+            var data = {'change_data':$(this).attr('admin_change'), 'categor_id':$(this).attr('categor_id')};
+            var ajax_url = url_admin_ajax_books_categor;
+            var change_id='book_categor_id_'+$(this).attr('categor_id');
+        }
+        else if ($(this).attr('admin_change') == 'book_categor_end_edit') {
+            var data = jQuery("#"+'book_categor_end_edit_id_'+$(this).attr('categor_id')).serialize();
+            var ajax_url = url_admin_ajax_books_categor;
+            var change_id='book_categor_id_'+$(this).attr('categor_id');
+        }
+        else if ($(this).attr('admin_change') == 'book_categor_deleted') {
+            var data = {'change_data':$(this).attr('admin_change'), 'categor_id':$(this).attr('categor_id')};
+            var ajax_url = url_admin_ajax_books_categor;
+            var change_id='book_categor_id_'+$(this).attr('categor_id');
+        }
+        else if ($(this).attr('admin_change') == 'book_categor_stop_edit') {
+            var data = {'change_data':$(this).attr('admin_change'), 'categor_id':$(this).attr('categor_id')};
+            var ajax_url = url_admin_ajax_books_categor;
+            var change_id='book_categor_id_'+$(this).attr('categor_id');
+        }
 
 
 

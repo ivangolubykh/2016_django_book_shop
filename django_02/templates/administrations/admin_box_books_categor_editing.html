@@ -1,0 +1,35 @@
+<td colspan="2">
+    <form method="post" id="book_categor_end_edit_id_{{ id }}">
+        <table>
+            <tr>
+                <td>
+                    <strong class="change_data" admin_change="book_categor_stop_edit" categor_id="{{ id }}">(отмена)</strong>
+                    {% if form_categor_edit.errors %}
+                        <ul>
+                            {% for errorkey in form_categor_edit.errors.items %}
+                                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {{ form_categor_edit.bcname }}
+                </td>
+                <td>
+                    {{ form_categor_edit.bcdescr }}
+                </td>
+                <td>
+                    {% csrf_token %}
+                    <input type="hidden" name="categor_id" value="{{ id }}">
+                    <input type="hidden" name="change_data" value="book_categor_end_edit" categor_id="{{ id }}">
+                    <input class="change_data" admin_change="book_categor_end_edit" type="button" categor_id="{{ id }}" value="Отредактировать категорию">
+                </td>
+                <td>
+                    <input class="change_data userdelete" admin_change="book_categor_deleted" type="button" categor_id="{{ id }}" value="Удалить категорию">
+                </td>
+            </tr>
+        </table>
+    </form>
+</td>
+
+
+
+
