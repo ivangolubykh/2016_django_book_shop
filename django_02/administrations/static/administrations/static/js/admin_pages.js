@@ -46,29 +46,38 @@ jQuery(document).ready(function ($) {
 
         else if ($(this).attr('admin_change') == 'book_author_list') {
             var data = jQuery("#"+'book_author_list').serialize();
-            var ajax_url = url_admin_ajax_books;
+            var ajax_url = url_admin_ajax_books_authors;
             var change_id = 'adminDinamo';
         }
         else if ($(this).attr('admin_change') == 'book_author_start_edit') {
             var data = {'change_data':$(this).attr('admin_change'), 'author_id':$(this).attr('author_id')};
-            var ajax_url = url_admin_ajax_books;
+            var ajax_url = url_admin_ajax_books_authors;
             var change_id='book_author_id_'+$(this).attr('author_id');
         }
         else if ($(this).attr('admin_change') == 'book_author_end_edit') {
             var data = jQuery("#"+'book_author_end_edit_id_'+$(this).attr('author_id')).serialize();
-            var ajax_url = url_admin_ajax_books;
+            var ajax_url = url_admin_ajax_books_authors;
             var change_id='book_author_id_'+$(this).attr('author_id');
         }
         else if ($(this).attr('admin_change') == 'book_author_deleted') {
             var data = {'change_data':$(this).attr('admin_change'), 'author_id':$(this).attr('author_id')};
-            var ajax_url = url_admin_ajax_books;
+            var ajax_url = url_admin_ajax_books_authors;
             var change_id='book_author_id_'+$(this).attr('author_id');
         }
         else if ($(this).attr('admin_change') == 'book_author_stop_edit') {
             var data = {'change_data':$(this).attr('admin_change'), 'author_id':$(this).attr('author_id')};
-            var ajax_url = url_admin_ajax_books;
+            var ajax_url = url_admin_ajax_books_authors;
             var change_id='book_author_id_'+$(this).attr('author_id');
         }
+
+
+        else if ($(this).attr('admin_change') == 'book_categor_list') {
+            var data = jQuery("#"+'book_categor_list').serialize();
+            var ajax_url = url_admin_ajax_books_categor;
+            var change_id = 'adminDinamo';
+        }
+
+
 
         else {
             data = '';

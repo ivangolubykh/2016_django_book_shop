@@ -1,0 +1,11 @@
+{% extends "administrations/admin_base.html" %}
+
+{% block title %}Редактирование контента.{% endblock %}
+
+
+{% block content %}
+    <p>Авторы книг:</p>
+    <div id="adminDinamo">
+        {% include 'administrations/admin_box_books_authors_list.html' %}
+    </div>
+{% endblock %}

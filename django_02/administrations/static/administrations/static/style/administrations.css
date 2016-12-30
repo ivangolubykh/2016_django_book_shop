@@ -29,3 +29,12 @@
 .userdelete {
     color: red;
 }
+
+header a {
+    border-bottom: 2px solid maroon;
+}
+
+header td:first-child a {
+    border-bottom: none;
+}
+
