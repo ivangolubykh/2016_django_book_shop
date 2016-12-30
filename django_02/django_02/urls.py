@@ -17,10 +17,13 @@ from django.conf.urls import url
 # from django.contrib import admin
 from mainapp.views import Main, Register_User, List_Books
 from authorization.views import Login, Logout
-from administrations.views import Admin_Main, Admin_Change_Data, Admin_Books_Authors, Admin_Books_Categories
+from administrations.views import Admin_Main, Admin_Change_Data, Admin_Books_Authors, Admin_Books_Categories, Admin_Books
 from django.views.generic.base import RedirectView # для редиректа с главной страницы в папку
 from django.conf.urls import url, include
 
+# для раздачи медиа ТОЛЬКО на ТЕСТОВОМ сервере
+from django.conf import settings
+from django.conf.urls.static import static
 
 starturl = r'^django/profile_ig/test_magazine-01/'
 
@@ -38,6 +41,7 @@ urlpatterns = [
         url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
         url(r'^books_authors/$', Admin_Books_Authors, name='admin_book_author'),
         url(r'^books_categories/$', Admin_Books_Categories, name='admin_book_categor'),
+        url(r'^books/$', Admin_Books, name='admin_book'),
     ])),
 ]
 
@@ -47,3 +51,4 @@ urlpatterns += [
     ])),
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для раздачи медиа ТОЛЬКО на ТЕСТОВОМ сервере

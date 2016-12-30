@@ -1,0 +1,18 @@
+<td>
+    <strong class="change_data" admin_change="book_start_edit" book_id="{{ book.id }}">{{ book.bname }}</strong>
+</td>
+<td>
+    {{ book.bauthor__baauthor }}
+</td>
+<td>
+    {{ book.bcategories__bcname }}
+</td>
+<td>
+    {{ book.brating }}
+</td>
+<td>
+    <img src="{{ MEDIA_URL }}{{ book.bimagelarge }}">
+</td>
+<td>
+    {{ book.bcdateadd }}
+</td>

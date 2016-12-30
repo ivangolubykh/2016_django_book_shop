@@ -18,6 +18,8 @@ jQuery(document).ready(function ($) {
             return cookieValue;
         }
         var csrftoken = getCookie('csrftoken');
+        var process_data = true;
+        var content_type = 'application/x-www-form-urlencoded; charset=UTF-8';
         if ($(this).attr('admin_change') == 'userlist') {
             var data = {'change_data':$(this).attr('admin_change')};
             var ajax_url = url_admin_ajax_change_view;
@@ -70,7 +72,6 @@ jQuery(document).ready(function ($) {
             var change_id='book_author_id_'+$(this).attr('author_id');
         }
 
-
         else if ($(this).attr('admin_change') == 'book_categor_list') {
             var data = jQuery("#"+'book_categor_list').serialize();
             var ajax_url = url_admin_ajax_books_categor;
@@ -97,7 +98,36 @@ jQuery(document).ready(function ($) {
             var change_id='book_categor_id_'+$(this).attr('categor_id');
         }
 
+        else if ($(this).attr('admin_change') == 'book_list') {
+            var data = new FormData(document.getElementById('book_list'));
+            var ajax_url = url_admin_ajax_books;
+            var change_id = 'adminDinamo';
+            process_data = false;
+            content_type = false;
+        }
+        else if ($(this).attr('admin_change') == 'book_start_edit') {
+            var data = {'change_data':$(this).attr('admin_change'), 'book_id':$(this).attr('book_id')};
+            var ajax_url = url_admin_ajax_books;
+            var change_id='book_id_'+$(this).attr('book_id');
+        }
+        else if ($(this).attr('admin_change') == 'book_end_edit') {
+            var data = jQuery("#"+'book_end_edit_id_'+$(this).attr('book_id')).serialize();
+            var ajax_url = url_admin_ajax_books;
+            var change_id='book_id_'+$(this).attr('book_id');
+        }
+        else if ($(this).attr('admin_change') == 'book_deleted') {
+            var data = {'change_data':$(this).attr('admin_change'), 'book_id':$(this).attr('book_id')};
+            var ajax_url = url_admin_ajax_books;
+            var change_id='book_id_'+$(this).attr('book_id');
+        }
 
+
+
+        else if ($(this).attr('admin_change') == 'book_stop_edit') {
+            var data = {'change_data':$(this).attr('admin_change'), 'book_id':$(this).attr('book_id')};
+            var ajax_url = url_admin_ajax_books;
+            var change_id='book_id_'+$(this).attr('book_id');
+        }
 
         else {
             data = '';
@@ -113,6 +143,8 @@ jQuery(document).ready(function ($) {
             },
             url: ajax_url,
             data: data,
+            contentType: content_type, // важно - убираем форматирование данных по умолчанию
+            processData: process_data, // Необходимо false для отправки данных типа FormData (убираем форматирование данных по умолчанию)и необходимо true для остальных случаев.
             dataType: "html",
             cache: false,
             success: function(data){

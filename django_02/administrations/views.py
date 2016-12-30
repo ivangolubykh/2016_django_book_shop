@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
-from administrations.forms import Edit_User_Form, Edit_User_Passw, Edit_Book_Author, Edit_Book_Categories
-from mainapp.models import Books_Author, Books_Categories
+from administrations.forms import Edit_User_Form, Edit_User_Passw, Edit_Book_Author, Edit_Book_Categories, Edit_Books
+from mainapp.models import Books_Author, Books_Categories, Books
 
 #from django.http import Http404, JsonResponse
 #from django.template import loader
@@ -253,6 +253,87 @@ def Admin_Books_Categories(request):
                 # 002 - Ошибка запроса. change_data недопустимая
         else:
             return render(request, 'administrations/adminn_books_categor.html', {'form_categor_add': Edit_Book_Categories(), 'categor_list': categories})
+
+
+
+
+def Admin_Books(request):
+    if Veryfy_Admin_Autorizations(request):
+        books = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').order_by('bname')
+        if request.method == "POST" and request.is_ajax:
+            try:
+                change_data = request.POST['change_data']
+            except:
+                return HttpResponse('Ошибка: 001', content_type='text/html; charset=utf-8')
+                # 001 - Ошибка запроса. Нет change_data
+
+            if change_data == 'book_list':
+                add_form = Edit_Books(request.POST, request.FILES)
+                if add_form.is_valid():
+                    add_form.save()
+                    return render(request, 'administrations/admin_box_books_list.html', {'form_book_add': Edit_Books(), 'books_list': books})
+                return render(request, 'administrations/admin_box_books_list.html', {'form_book_add': add_form, 'books_list': books})
+
+            elif change_data == 'book_start_edit':
+                try:
+                    edit_id = request.POST['book_id']
+                except:
+                    return HttpResponse('Ошибка: 006', content_type='text/html; charset=utf-8')
+                    # 006 - Ошибка запроса. Нет book_id
+                books = get_object_or_404(Books, id=edit_id)
+                return render(request, 'administrations/admin_box_books_editing.html', {'form_book_edit': Edit_Books(instance=books), 'id': edit_id})
+
+            elif change_data == 'book_end_edit':
+                try:
+                    edit_id = request.POST['book_id']
+                except:
+                    return HttpResponse('Ошибка: 006', content_type='text/html; charset=utf-8')
+                    # 006 - Ошибка запроса. Нет categor_id
+                book_editing = get_object_or_404(Books, id=edit_id)
+                form = Edit_Books(request.POST or None, instance=book_editing)
+                if form.is_valid():
+                    form.save()
+                    book = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').get(id=edit_id)
+                    return render(request, 'administrations/admin_box_books_info.html', {'book': book})
+                else:
+                    return render(request, 'administrations/admin_box_books_editing.html', {'form_book_edit': form, 'id': edit_id})
+
+            elif change_data == 'book_deleted':
+                try:
+                    del_id = request.POST['book_id']
+                except:
+                    del_id = ''
+                if del_id:
+                    user = get_object_or_404(Books, id=del_id)
+                    if user:
+                        user.delete()
+                        return HttpResponse('Книга удалена успешно.', content_type='text/html; charset=utf-8', charset='utf-8')
+                    else:
+                        return HttpResponse('Ошибка: Такой книги в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                else:
+                    return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
+                    # 004 - Ошибка: передан некорректный id (или не передан вовсе).
+
+            elif change_data == 'book_stop_edit':
+                try:
+                    stop_edit_id = request.POST['book_id']
+                except:
+                    stop_edit_id = ''
+                if stop_edit_id:
+                    book = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').get(id=stop_edit_id)
+                    if book:
+                        return render(request, 'administrations/admin_box_books_info.html', {'book': book})
+                    else:
+                        return HttpResponse('Ошибка: Такой категории нет в БД.', content_type='text/html; charset=utf-8', charset='utf-8')
+                else:
+                    return HttpResponse('Ошибка: 004', content_type='text/html; charset=utf-8', charset='utf-8')
+                    # 004 - Ошибка: передан некорректный id (или не передан вовсе).
+
+            else:
+                return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')
+                # 002 - Ошибка запроса. change_data недопустимая
+        else:
+            return render(request, 'administrations/adminn_books.html', {'form_book_add': Edit_Books(), 'books_list': books})
 
 
 

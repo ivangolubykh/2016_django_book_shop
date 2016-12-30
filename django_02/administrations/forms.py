@@ -66,3 +66,11 @@ class Edit_Book_Categories(forms.ModelForm):
         model = Books_Categories
         # Типы полей, отображаемых в форме
         fields = ('__all__')
+
+class Edit_Books(forms.ModelForm):
+    class Meta:
+        # Модель (БД) данных, которую используем:
+        model = Books
+        # Типы полей, отображаемых в форме
+        fields = ('__all__')
+

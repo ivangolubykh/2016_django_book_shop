@@ -17,13 +17,13 @@ class Books_Author(models.Model):
 
 class Books(models.Model):
     bname = models.CharField(max_length=255, blank=False, db_index=True, unique=True, help_text='Название книги', verbose_name = "Название книги")
-    brating = models.PositiveSmallIntegerField(db_index=True, default=0)
-    bcdateadd = models.DateTimeField(auto_now_add=True) # автоматически добавится при создании.
-    bimagesmall = models.ImageField(upload_to='books_image_small/', blank=False, editable=False)
-    bimagelarge = models.ImageField(upload_to='books_image_large/', blank=False)
-    # для упрощения учебного проекта в связи с ограниченностью времени решил предусмотреть только одного автора для каждой книги.
     bauthor = models.ForeignKey(Books_Author, on_delete=models.SET_NULL, db_index=True, null=True, help_text='Автор книги', blank=False, verbose_name = "Автор книги")
     bcategories = models.ManyToManyField(Books_Categories, db_index=True, help_text='Категория книги, может быть несколько.', verbose_name = "Категория книги")
+    brating = models.PositiveSmallIntegerField(db_index=True, default=0)
+    bcdateadd = models.DateTimeField(auto_now_add=True, verbose_name = "Дата добавления") # автоматически добавится при создании.
+    bimagesmall = models.ImageField(upload_to='books_image_small/', blank=True, editable=False)
+    bimagelarge = models.ImageField(upload_to='books_image_large/', blank=False, verbose_name = "Картинка")
+    # для упрощения учебного проекта в связи с ограниченностью времени решил предусмотреть только одного автора для каждой книги.
     def __str__(self):
-        return self.bname + ' (' + self.bauthor__baauthor + ')'
+        return self.bname
 
