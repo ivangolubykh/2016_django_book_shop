@@ -1,7 +1,7 @@
 <br>
 <form method="post" id="book_author_end_edit_id_{{ id }}">
     {% csrf_token %}
-    <p>Редактировать автора:
+    <p><strong class="change_data" admin_change="book_author_stop_edit" author_id="{{ id }}">Редактировать автора:</strong>
 
         {% if form_author_edit.errors %}
         <ul>

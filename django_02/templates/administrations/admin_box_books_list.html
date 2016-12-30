@@ -1,6 +1,6 @@
 <form method="post" id="book_author_list">
     {% csrf_token %}
-    <p>Добавить автора:
+    <p><strong class="change_data" admin_change="book_author_stop_edit" author_id="{{ author.id }}">Редактировать автора:</strong>
 
         {% if form_author_add.errors %}
         <ul>
@@ -19,7 +19,7 @@
 {% if author_list|length != 0 %}
     <p>Список авторов:</p><p>
     {% for author in author_list %}
-        <strong id="book_author_id={{ author.id }}">
+        <strong id="book_author_id_{{ author.id }}">
             {% include 'administrations/admin_box_books_author_info.html' %}
         </strong>
     {% endfor %}
