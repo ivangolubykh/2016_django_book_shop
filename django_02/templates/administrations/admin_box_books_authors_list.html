@@ -1,0 +1,27 @@
+<form method="post" id="book_author_list">
+    {% csrf_token %}
+    <p>Добавить автора:</strong>
+
+        {% if form_author_add.errors %}
+        <ul>
+            {% for errorkey in form_author_add.errors.items %}
+                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {{ form_author_add.baauthor }}
+
+        <input type="hidden" name="change_data" value="book_author_list">
+        <input class="change_data" admin_change="book_author_list" type="button" value="Добавить нового автора"></p>
+</form>
+
+{% if author_list|length != 0 %}
+    <p>Список авторов:</p><p>
+    {% for author in author_list %}
+        <strong id="book_author_id_{{ author.id }}">
+            {% include 'administrations/admin_box_books_author_info.html' %}
+        </strong>
+    {% endfor %}
+    </p>
+{% endif %}

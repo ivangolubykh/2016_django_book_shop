@@ -7,7 +7,7 @@
 	font-weight: bold;
 }
 
-.userlist td {
+.userlist td, .userlist tr {
 	border: 1px solid black;
 	text-align: center;
 	padding: 3px;
@@ -28,4 +28,18 @@
 
 .userdelete {
     color: red;
+}
+
+header a {
+    border-bottom: 2px solid maroon;
+}
+
+header td:first-child a {
+    border-bottom: none;
+}
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px;
 }
