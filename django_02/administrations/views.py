@@ -259,7 +259,7 @@ def Admin_Books_Categories(request):
 
 def Admin_Books(request):
     if Veryfy_Admin_Autorizations(request):
-        books = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').order_by('bname')
+        books = Books.objects.prefetch_related('bauthor', 'bcategories').order_by('bname')
         if request.method == "POST" and request.is_ajax:
             try:
                 change_data = request.POST['change_data']
@@ -293,7 +293,7 @@ def Admin_Books(request):
                 form = Edit_Books(request.POST or None, instance=book_editing)
                 if form.is_valid():
                     form.save()
-                    book = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').get(id=edit_id)
+                    book = Books.objects.prefetch_related('bauthor', 'bcategories').get(id=edit_id)
                     return render(request, 'administrations/admin_box_books_info.html', {'book': book})
                 else:
                     return render(request, 'administrations/admin_box_books_editing.html', {'form_book_edit': form, 'id': edit_id})
@@ -320,7 +320,7 @@ def Admin_Books(request):
                 except:
                     stop_edit_id = ''
                 if stop_edit_id:
-                    book = Books.objects.values('id', 'bname', 'bauthor__baauthor', 'bcategories__bcname', 'brating', 'bcdateadd', 'bimagelarge').get(id=stop_edit_id)
+                    book = Books.objects.prefetch_related('bauthor', 'bcategories').get(id=stop_edit_id)
                     if book:
                         return render(request, 'administrations/admin_box_books_info.html', {'book': book})
                     else:
