@@ -1,9 +1,23 @@
 from django.contrib import auth
 
 # Create your views here.
-from django.shortcuts import render
-from general_function.general_function import Return_to_back
+from django.shortcuts import render, HttpResponseRedirect
 from django.http import Http404
+
+
+def Return_to_back(request):
+    try:
+        referer = request.META['HTTP_REFERER']
+    except:
+        referer = False
+    if referer:
+        # if request.path == reverse('login') or request.path == reverse('login'):
+        if referer == request.build_absolute_uri():
+            return HttpResponseRedirect("/")
+        else:
+            return HttpResponseRedirect(referer)
+    else:
+        return HttpResponseRedirect("/")
 
 
 def Login(request):
@@ -21,6 +35,8 @@ def Login(request):
 #        raise Http404
         return Return_to_back(request)
 
+
 def Logout(request):
-    auth.logout(request)
+    if request.method == "POST" and request.user.is_authenticated:
+        auth.logout(request)
     return Return_to_back(request)

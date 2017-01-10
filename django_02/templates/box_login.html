@@ -21,7 +21,7 @@
 
 </div>
 {% if user.is_authenticated %}
-    <form action="{% url 'logout' %}">
+    <form method="post" action="{% url 'logout' %}">
         {% csrf_token %}
         {{ user }} <input type="submit" value="Разлогиниться">
     </form>

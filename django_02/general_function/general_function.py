@@ -4,12 +4,16 @@ from django.shortcuts import render, HttpResponseRedirect
 
 
 def Return_to_back(request):
-    if request.META['HTTP_REFERER']:
+    try:
+        referer = request.META['HTTP_REFERER']
+    except:
+        referer = False
+    if referer:
         # if request.path == reverse('login') or request.path == reverse('login'):
-        if request.META['HTTP_REFERER'] == request.build_absolute_uri():
+        if referer == request.build_absolute_uri():
             return HttpResponseRedirect("/")
         else:
-            return HttpResponseRedirect(request.META['HTTP_REFERER'])
+            return HttpResponseRedirect(referer)
     else:
         return HttpResponseRedirect("/")
 

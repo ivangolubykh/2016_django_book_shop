@@ -32,8 +32,6 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='django/profile_ig/test_magazine-01/')), # редирект с главной страницы в папку
     url(starturl, include([
         url(r'^$', Main, name='main'),
-        url(r'^login/$', Login, name='login'),
-        url(r'^logout/$', Logout, name='logout'),
         url(r'^registration/$', Register_User, name='register_user'),
     ])),
     url(starturl + 'admin/', include([
@@ -44,6 +42,12 @@ urlpatterns = [
         url(r'^books/$', Admin_Books, name='admin_book'),
     ])),
 ]
+
+urlpatterns += [
+    url(starturl + 'authorization/', include('authorization.urls')),
+]
+
+
 
 urlpatterns += [
     url(starturl, include([
