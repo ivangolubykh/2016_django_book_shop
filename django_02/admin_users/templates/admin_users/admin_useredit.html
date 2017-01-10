@@ -1,14 +1,12 @@
-
-<p>Сведения о пользователе:</p>
-
-
+<td colspan="10">
     <table>
+        <tr><td colspan="2" class="change_data" admin_change="item_stop_edit" item_id="{{ id }}">(Отмена)</td></tr>
         <tr><td width="50%">
 
             <form id="edit_user_id" method="post" action="{% url 'register_user' %}">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{id}}">
-            <input type="hidden" name="change_data" value="useredit">
+            <input type="hidden" name="change_data" value="item_edit">
             <table>
                 {% for field in form %}
                     <tr>
@@ -26,10 +24,10 @@
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td align="center" colspan="2"><input class="change_data" admin_change="useredit" type="button" value="Редактировать"></td>
+                    <td align="center" colspan="2"><input class="change_data" admin_change="item_edit" item_id="{{ id }}" type="button" value="Редактировать"></td>
                 </tr>
                 <tr>
-                    <td align="left" colspan="2"><input class="change_data userdelete" admin_change="userdelete" del_id="{{id}}" type="button" value="Удалить пользователя">
+                    <td align="left" colspan="2"><input class="change_data userdelete" admin_change="item_delete" item_id="{{id}}" type="button" value="Удалить пользователя">
                     </td>
                 </tr>
             </table>
@@ -41,7 +39,7 @@
             <form id="edit_user_id_passw" method="post" action="{% url 'register_user' %}">
             {% csrf_token %}
             <input type="hidden" name="id" value="{{id}}">
-            <input type="hidden" name="change_data" value="useredit_passw">
+            <input type="hidden" name="change_data" value="item_edit_passw">
             <table>
                 <tr>
                     <td colspan="2">
@@ -64,14 +62,14 @@
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td align="center" colspan="2"><input class="change_data" admin_change="useredit_passw" type="button" value="Изменить пароль пользователя"></td>
+                    <td align="center" colspan="2"><input class="change_data" admin_change="item_edit_passw" item_id="{{ id }}" type="button" value="Изменить пароль пользователя"></td>
                 </tr>
             </table>
             </form>
 
         </td></tr>
     </table>
-
+</td>
 
 {% load staticfiles %}
 <script>

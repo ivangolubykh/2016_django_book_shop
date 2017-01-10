@@ -1,0 +1,35 @@
+
+<td>{{ item.id }}</td>
+<td><strong class="change_data" admin_change="item_start_edit" item_id="{{ item.id }}">{{item.username }}</strong> </td>
+<td>{{ item.last_name }}</td>
+<td>{{ item.first_name }}</td>
+<td>{{ item.email }}</td>
+<td>
+    {% if item.is_active %}
+        да
+    {% else %}
+        нет
+    {% endif %}
+</td>
+<td>
+    {% if item.is_staff %}
+        да
+    {% else %}
+        нет
+    {% endif %}
+</td>
+<td>
+    {% if item.is_superuser %}
+        да
+    {% else %}
+        нет
+    {% endif %}
+</td>
+<td>{{ item.date_joined|date:'G:i, j E Y' }} GMT</td>
+<td>
+    {% if item.last_login %}
+        {{ item.last_login|date:'G:i, j E Y' }} GMT
+    {% else %}
+        никогда
+    {% endif %}
+</td>

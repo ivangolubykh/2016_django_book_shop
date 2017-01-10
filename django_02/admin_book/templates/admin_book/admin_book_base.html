@@ -31,7 +31,6 @@
 	<header>
 		<table>
 			<tr>
-				<td rowspan="2" class="logo"><a href="{% url 'main' %}"><img title="Главная" src="{% static 'general/logo-01.png' %}"></a></td>
 				<td>
 					<a href="{% url 'main' %}">Главная страница сайта</a>
 					<a href="{% url 'admin_main' %}">Главная страница админки</a>
@@ -41,12 +40,9 @@
 				</td>
 				<td class="form_reg">
 
-					{% include 'box_login.html' %}
+					{% include 'authorization/box_login.html' %}
 
 				</td>
-			</tr>
-			<tr>
-				<td colspan="3" class="search">Поиск</td>
 			</tr>
 		</table>
 	</header>

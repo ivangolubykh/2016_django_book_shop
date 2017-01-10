@@ -33,13 +33,6 @@ urlpatterns = [
         url(r'^$', Main, name='main'),
         url(r'^registration/$', Register_User, name='register_user'),
     ])),
-    # url(starturl + 'admin/', include([
-    #     url(r'^$', Admin_Main, name='admin_main'),
-    #     url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
-    #     url(r'^books_authors/$', Admin_Books_Authors, name='admin_book_author'),
-    #     url(r'^books_categories/$', Admin_Books_Categories, name='admin_book_categor'),
-    #     url(r'^books/$', Admin_Books, name='admin_book'),
-    # ])),
 ]
 
 urlpatterns += [
@@ -52,12 +45,6 @@ urlpatterns += [
     url(starturl + 'admin_book/', include('admin_book.urls')),
 ]
 
-
-urlpatterns += [
-    url(starturl, include([
-        url(r'^book/([\d+])/$', List_Books, name='book'),
-    ])),
-]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для раздачи медиа ТОЛЬКО на ТЕСТОВОМ сервере
 
