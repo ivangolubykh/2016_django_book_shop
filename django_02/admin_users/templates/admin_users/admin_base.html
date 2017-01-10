@@ -24,7 +24,7 @@
 
 	<link rel="stylesheet" href="{% static 'general/style/reset.css' %}">
 	<link rel="stylesheet" href="{% static 'general/style/style.css' %}">
-	<link rel="stylesheet" href="{% static 'administrations/static/style/administrations.css' %}">
+	<link rel="stylesheet" href="{% static 'admin_book/static/style/admin_book.css' %}">
 </head>
 <body>
 <div class="overfooter">
@@ -64,7 +64,7 @@
 			<p><strong class="change_data" admin_change="userlist">Показать/обновить Список пользователей:</strong></p>
 			<div id="adminDinamo">
 
-				{% include 'administrations/admin_userlist.html' %}
+				{% include 'admin_users/admin_userlist.html' %}
 
 			</div>
 		{% else %}
@@ -89,11 +89,8 @@
 	<script src="{% static 'general/js/jquery.min.js' %}"></script>
 <script>
 	var url_admin_ajax_change_view = '{% url 'admin_change_data' %}';
-	var url_admin_ajax_books_authors = '{% url 'admin_book_author' %}';
-	var url_admin_ajax_books_categor = '{% url 'admin_book_categor' %}';
-	var url_admin_ajax_books = '{% url 'admin_book' %}';
 </script>
-	<script src="{% static 'administrations/static/js/admin_pages.js' %}"></script>
+	<script src="{% static 'admin_users/static/js/admin_pages.js' %}"></script>
 {% endblock %}
 
 

@@ -1,4 +1,4 @@
-"""authorization URL Configuration
+"""admin_users URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -13,12 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-
-from django.conf.urls import url, include
-from .views import Login, Logout
-
+from django.conf.urls import url
+from .views import Admin_Main, Admin_Change_Data
 
 urlpatterns = [
-    url(r'^login/$', Login, name='login'),
-    url(r'^logout/$', Logout, name='logout'),
+    url(r'^$', Admin_Main, name='admin_main'),
+    url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
 ]
+

@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class AdministrationsConfig(AppConfig):
-    name = 'administrations'
+    name = 'admin_book'

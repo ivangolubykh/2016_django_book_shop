@@ -1,4 +1,4 @@
-"""authorization URL Configuration
+"""django_02 URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.10/topics/http/urls/
@@ -13,12 +13,17 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf.urls import url
+from .views import Admin_Books_Authors, Admin_Books_Categories, Admin_Books
 
-from django.conf.urls import url, include
-from .views import Login, Logout
-
+from mainapp.views import Main, Register_User, List_Books
 
 urlpatterns = [
-    url(r'^login/$', Login, name='login'),
-    url(r'^logout/$', Logout, name='logout'),
+    url(r'^books_authors/$', Admin_Books_Authors, name='admin_book_author'),
+    url(r'^books_categories/$', Admin_Books_Categories, name='admin_book_categor'),
+    url(r'^books/$', Admin_Books, name='admin_book'),
+]
+
+urlpatterns += [
+    url(r'^book/([\d+])/$', List_Books, name='book'),
 ]
