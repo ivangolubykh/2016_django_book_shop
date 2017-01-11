@@ -1,23 +1,23 @@
-.userlist {
+.item_list {
 	margin: 5px auto;
 
 }
 
-.userlist tr:first-child {
+.item_list tr:first-child {
 	font-weight: bold;
 }
 
-.userlist td, .userlist tr {
+.item_list td, .item_list tr {
 	border: 1px solid black;
 	text-align: center;
 	padding: 3px;
 }
 
-.userlist a {
+.item_list a {
     color: blue;
 }
 
-.userlist a:visited {
+.item_list a:visited {
     color: maroon;
 }
 

@@ -18,45 +18,47 @@ jQuery(document).ready(function ($) {
             return cookieValue;
         }
         var csrftoken = getCookie('csrftoken');
-        if ($(this).attr('admin_change') == 'userlist') {
-            var data = {'change_data':$(this).attr('admin_change')};
-            var ajax_url = url_admin_ajax_change_view;
-            var change_id = 'Dinamo_list';
+        var process_data = true;
+        var content_type = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+        if ($(this).attr('admin_change') == 'item_list') {
+            if (send_file == true) {
+                var data = new FormData(document.getElementById('item_list'));
+                process_data = false;
+                content_type = false;
+            }
+            else {
+                var data = jQuery("#"+'item_list').serialize();
+            }
+            var ajax_url = url_admin_ajax_items;
+            var change_id = 'List_Dinamo';
         }
         else if ($(this).attr('admin_change') == 'item_start_edit') {
             var data = {'change_data':$(this).attr('admin_change'), 'item_id':$(this).attr('item_id')};
-            var ajax_url = url_admin_ajax_change_view;
+            var ajax_url = url_admin_ajax_items;
+            var change_id='item_id_'+$(this).attr('item_id');
+        }
+        else if ($(this).attr('admin_change') == 'item_end_edit') {
+            var data = jQuery("#"+'item_end_edit_id_'+$(this).attr('item_id')).serialize();
+            var ajax_url = url_admin_ajax_items;
+            var change_id='item_id_'+$(this).attr('item_id');
+        }
+        else if ($(this).attr('admin_change') == 'item_deleted') {
+            var data = {'change_data':$(this).attr('admin_change'), 'item_id':$(this).attr('item_id')};
+            var ajax_url = url_admin_ajax_items;
             var change_id='item_id_'+$(this).attr('item_id');
         }
         else if ($(this).attr('admin_change') == 'item_stop_edit') {
             var data = {'change_data':$(this).attr('admin_change'), 'item_id':$(this).attr('item_id')};
-            var ajax_url = url_admin_ajax_change_view;
-            var change_id='item_id_'+$(this).attr('item_id');
-        }
-        else if ($(this).attr('admin_change') == 'item_edit') {
-            var data = jQuery("#"+'edit_user_id').serialize();
-            var ajax_url = url_admin_ajax_change_view;
-            var change_id='item_id_'+$(this).attr('item_id');
-
-        }
-        else if ($(this).attr('admin_change') == 'item_delete') {
-            var data = {'change_data':$(this).attr('admin_change'), 'item_id':$(this).attr('item_id')};
-            var ajax_url = url_admin_ajax_change_view;
-            var change_id='item_id_'+$(this).attr('item_id');
-        }
-
-        else if ($(this).attr('admin_change') == 'item_edit_passw') {
-            var data = jQuery("#"+'edit_user_id_passw').serialize();
-            var ajax_url = url_admin_ajax_change_view;
+            var ajax_url = url_admin_ajax_items;
             var change_id='item_id_'+$(this).attr('item_id');
         }
 
         else {
             data = '';
             var ajax_url = url_admin_ajax_change_view;
-            var change_id = 'Dinamo_list';
+            var change_id = 'adminDinamo';
         }
-
 
         $.ajax({
             type: "POST",
@@ -65,6 +67,8 @@ jQuery(document).ready(function ($) {
             },
             url: ajax_url,
             data: data,
+            contentType: content_type, // важно - при отправке файлов убираем форматирование данных по умолчанию
+            processData: process_data, // Необходимо false для отправки данных типа FormData (убираем форматирование данных по умолчанию)и необходимо true для остальных случаев.
             dataType: "html",
             cache: false,
             success: function(data){

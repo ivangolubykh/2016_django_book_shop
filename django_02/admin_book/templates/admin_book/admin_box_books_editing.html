@@ -1,38 +1,38 @@
 <td colspan="6">
-    <form method="post" id="book_end_edit_id_{{ id }}">
+    <form method="post" id="item_end_edit_id_{{ id }}">
         <table>
             <tr>
                 <td>
-                    <strong class="change_data" admin_change="book_stop_edit" book_id="{{ id }}">(отмена)</strong>
-                    {% if form_book_edit.errors %}
+                    <strong class="change_data" admin_change="item_stop_edit" item_id="{{ id }}">(отмена)</strong>
+                    {% if form_item_edit.errors %}
                         <ul>
-                            {% for errorkey in form_book_edit.errors.items %}
+                            {% for errorkey in form_item_edit.errors.items %}
                                 <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
                             {% endfor %}
                         </ul>
                     {% endif %}
-                    {{ form_book_edit.bname }}
+                    {{ form_item_edit.bname }}
                 </td>
                 <td>
-                    {{ form_book_edit.bauthor }}
+                    {{ form_item_edit.bauthor }}
                 </td>
                 <td>
-                    {{ form_book_edit.bcategories }}
+                    {{ form_item_edit.bcategories }}
                 </td>
                 <td>
-                    {{ form_book_edit.brating }}
+                    {{ form_item_edit.brating }}
                 </td>
                 <td>
-                    {{ form_book_edit.bimagelarge }}
+                    {{ form_item_edit.bimagelarge }}
                 </td>
                 <td>
                     {% csrf_token %}
-                    <input type="hidden" name="book_id" value="{{ id }}">
-                    <input type="hidden" name="change_data" value="book_end_edit" book_id="{{ id }}">
-                    <input class="change_data" admin_change="book_end_edit" type="button" book_id="{{ id }}" value="Отредактировать книгу">
+                    <input type="hidden" name="item_id" value="{{ id }}">
+                    <input type="hidden" name="change_data" value="item_end_edit" item_id="{{ id }}">
+                    <input class="change_data" admin_change="item_end_edit" type="button" item_id="{{ id }}" value="Отредактировать книгу">
                 </td>
                 <td>
-                    <input class="change_data userdelete" admin_change="book_deleted" type="button" book_id="{{ id }}" value="Удалить книгу">
+                    <input class="change_data userdelete" admin_change="item_deleted" type="button" item_id="{{ id }}" value="Удалить книгу">
                 </td>
             </tr>
         </table>

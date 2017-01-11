@@ -29,10 +29,9 @@ starturl = r'^django/profile_ig/test_magazine-01/'
 urlpatterns = [
 #    url(r'^admin/', admin.site.urls),
     url(r'^$', RedirectView.as_view(url='django/profile_ig/test_magazine-01/')), # редирект с главной страницы в папку
-    url(starturl, include([
-        url(r'^$', Main, name='main'),
-        url(r'^registration/$', Register_User, name='register_user'),
-    ])),
+]
+urlpatterns += [
+    url(starturl, include('mainapp.urls')),
 ]
 
 urlpatterns += [
@@ -44,6 +43,7 @@ urlpatterns += [
 urlpatterns += [
     url(starturl + 'admin_book/', include('admin_book.urls')),
 ]
+
 
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # для раздачи медиа ТОЛЬКО на ТЕСТОВОМ сервере

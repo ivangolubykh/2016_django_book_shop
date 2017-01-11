@@ -135,9 +135,10 @@ MEDIA_URL = '/media/'
 
 
 if DEBUG:
+    pass
     # автозапуск модуля панельки:
-    MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    # MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     # включение панельки в список установленых приложений:
-    INSTALLED_APPS += ('debug_toolbar',)
+    # INSTALLED_APPS += ('debug_toolbar',)
     # IP-адрес браузера, а не сервера:
-    INTERNAL_IPS = ('127.0.0.1',)
+    # INTERNAL_IPS = ('127.0.0.1',)

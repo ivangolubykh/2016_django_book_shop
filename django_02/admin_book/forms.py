@@ -1,5 +1,5 @@
 from django import forms
-from mainapp.models import Books_Categories, Books, Books_Author
+from .models import Books_Categories, Books, Books_Author
 
 
 class Edit_Book_Author(forms.ModelForm):

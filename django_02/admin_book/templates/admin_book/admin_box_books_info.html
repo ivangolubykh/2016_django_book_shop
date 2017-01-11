@@ -1,18 +1,18 @@
 <td>
-    <strong class="change_data" admin_change="book_start_edit" book_id="{{ book.id }}">{{ book.bname }}</strong>
+    <strong class="change_data" admin_change="item_start_edit" item_id="{{ item.id }}">{{ item.bname }}</strong>
 </td>
 <td>
-    {{ book.bauthor.baauthor }}
+    {{ item.bauthor.baauthor }}
 </td>
 <td>
-    {{ book.bcategories.all | join:", " }}
+    {{ item.bcategories.all | join:", " }}
 </td>
 <td>
-    {{ book.brating }}
+    {{ item.brating }}
 </td>
 <td>
-    <img src="{{ MEDIA_URL }}{{ book.bimagelarge }}">
+    <img src="{{ MEDIA_URL }}{{ item.bimagelarge }}">
 </td>
 <td>
-    {{ book.bcdateadd }}
+    {{ item.bcdateadd }}
 </td>
