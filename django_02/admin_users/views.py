@@ -44,6 +44,7 @@ def Admin_Change_Data(request):
             except:
                 return HttpResponse('Ошибка: 001', content_type='text/html; charset=utf-8')
                 # 001 - Ошибка запроса. Нет change_data
+
             if change_data  == 'userlist':
                 list = User.objects.order_by( 'username')
                 paginator = Paginator(list, ITEMS_TO_PAGE) # количество элементов на странице

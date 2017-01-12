@@ -33,6 +33,11 @@ jQuery(document).ready(function ($) {
             var ajax_url = url_admin_ajax_items;
             var change_id = 'List_Dinamo';
         }
+        else if ($(this).attr('admin_change') == 'item_list_page') {
+            var data = {'change_data':$(this).attr('admin_change'), 'page_num':$(this).attr('page_num')};
+            var ajax_url = url_admin_ajax_items;
+            var change_id = 'List_Dinamo';
+        }
         else if ($(this).attr('admin_change') == 'item_start_edit') {
             var data = {'change_data':$(this).attr('admin_change'), 'item_id':$(this).attr('item_id')};
             var ajax_url = url_admin_ajax_items;

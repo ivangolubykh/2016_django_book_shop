@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import Edit_Book_Author, Edit_Book_Categories, Edit_Books
 from .models import Books_Author, Books_Categories, Books
@@ -32,8 +33,12 @@ def Veryfy_Admin_Autorizations(request):
 
 def List_Edit_item(request, model, form_edit, sortBy, external_indexes, template_page, template_list, template_editing,
                    template_info):
+
+    ITEMS_TO_PAGE = 3  # количество элементов на странице
+
     if Veryfy_Admin_Autorizations(request):
         list = model.objects.prefetch_related(*external_indexes).order_by(sortBy)
+        paginator = Paginator(list, ITEMS_TO_PAGE)
         if request.method == "POST" and request.is_ajax:
             try:
                 change_data = request.POST['change_data']
@@ -47,6 +52,21 @@ def List_Edit_item(request, model, form_edit, sortBy, external_indexes, template
                     add_form.save()
                     return render(request, template_list, {'form_item_add': form_edit(), 'item_list': list})
                 return render(request, template_list, {'form_item_add': add_form, 'item_list': list})
+
+            elif change_data == 'item_list_page':
+                try:
+                    page = request.POST['page_num']
+                except:
+                    page = 1
+                try:
+                    list = paginator.page(page)
+                except PageNotAnInteger:
+                    # If page is not an integer, deliver first page.
+                    list = paginator.page(1)
+                except EmptyPage:
+                    # If page is out of range (e.g. 9999), deliver last page of results.
+                    list = paginator.page(paginator.num_pages)
+                return render(request, template_list, {'form_item_add': form_edit, 'item_list': list})
 
             elif change_data == 'item_start_edit':
                 try:
@@ -107,7 +127,7 @@ def List_Edit_item(request, model, form_edit, sortBy, external_indexes, template
                 return HttpResponse('Ошибка: 002', content_type='text/html; charset=utf-8')
                 # 002 - Ошибка запроса. change_data недопустимая
         else:
-            return render(request, template_page, {'form_item_add': form_edit, 'item_list': list})
+            return render(request, template_page, {'form_item_add': form_edit, 'item_list': paginator.page(1)})
 
 
 

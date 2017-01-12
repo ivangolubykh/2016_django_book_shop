@@ -27,7 +27,19 @@
 <hr>
 
 {% if item_list|length != 0 %}
-    <center>Список категорий:</center>
+    <center>Список книг:</center>
+    <center>
+        {% if item_list.number > 1 %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.previous_page_number }}>&lt;&lt;previous
+            ({{ item_list.previous_page_number }}) |</strong>
+        {% endif %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.number }}>Обновить список
+            ({{ item_list.number }}):</strong>
+        {% if item_list.number < item_list.paginator.num_pages %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.next_page_number }}>| next
+            ({{ item_list.next_page_number }})&gt;&gt;</strong>
+        {% endif %}
+    </center>
     <table class="item_list">
         <tr>
             {% for item in form_item_add %}
