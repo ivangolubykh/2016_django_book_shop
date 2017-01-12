@@ -1,0 +1,39 @@
+<form method="post" id="item_list">
+    {% csrf_token %}
+    <p>Добавить автора:</p>
+
+        {% if form_item_add.errors %}
+        <ul>
+            {% for errorkey in form_item_add.errors.items %}
+                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {{ form_item_add.baauthor }}
+
+        <input type="hidden" name="change_data" value="item_list">
+        <input class="change_data" admin_change="item_list" type="button" value="Добавить нового автора"></p>
+</form>
+
+{% if item_list|length != 0 %}
+    <p>Список авторов:</p><p>
+    <center>
+        {% if item_list.number > 1 %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.previous_page_number }}>&lt;&lt;previous
+            ({{ item_list.previous_page_number }}) |</strong>
+        {% endif %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.number }}>Обновить список
+            ({{ item_list.number }}):</strong>
+        {% if item_list.number < item_list.paginator.num_pages %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.next_page_number }}>| next
+            ({{ item_list.next_page_number }})&gt;&gt;</strong>
+        {% endif %}
+    </center>
+    {% for item in item_list %}
+        <strong id="item_id_{{ item.id }}">
+            {% include 'admin_book/admin_box_books_author_info.html' %}
+        </strong>
+    {% endfor %}
+    </p>
+{% endif %}

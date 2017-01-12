@@ -1,0 +1,35 @@
+<td colspan="2">
+    <form method="post" id="item_end_edit_id_{{ id }}">
+        <table>
+            <tr>
+                <td>
+                    <strong class="change_data" admin_change="item_stop_edit" item_id="{{ id }}">(отмена)</strong>
+                    {% if form_categor_edit.errors %}
+                        <ul>
+                            {% for errorkey in form_item_edit.errors.items %}
+                                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {{ form_item_edit.bcname }}
+                </td>
+                <td>
+                    {{ form_item_edit.bcdescr }}
+                </td>
+                <td>
+                    {% csrf_token %}
+                    <input type="hidden" name="item_id" value="{{ id }}">
+                    <input type="hidden" name="change_data" value="item_end_edit" item_id="{{ id }}">
+                    <input class="change_data" admin_change="item_end_edit" type="button" item_id="{{ id }}" value="Отредактировать категорию">
+                </td>
+                <td>
+                    <input class="change_data userdelete" admin_change="item_deleted" type="button" item_id="{{ id }}" value="Удалить категорию">
+                </td>
+            </tr>
+        </table>
+    </form>
+</td>
+
+
+
+

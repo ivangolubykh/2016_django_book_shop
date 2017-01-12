@@ -1,0 +1,21 @@
+<br>
+<form method="post" id="item_end_edit_id_{{ id }}">
+    {% csrf_token %}
+    <p><strong class="change_data" admin_change="item_stop_edit" item_id="{{ id }}">Редактировать автора:</strong>
+
+        {% if form_item_edit.errors %}
+        <ul>
+            {% for errorkey in form_item_edit.errors.items %}
+                <li class="error_registrations">Ошибка: {{ errorkey.1 }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {{ form_item_edit.baauthor }}
+
+        <input type="hidden" name="item_id" value="{{ id }}">
+        <input type="hidden" name="change_data" value="item_end_edit" item_id="{{ id }}">
+        <input class="change_data" admin_change="item_end_edit" type="button" item_id="{{ id }}" value="Отредактировать автора">
+        <input class="change_data userdelete" admin_change="item_deleted" type="button" item_id="{{ id }}" value="Удалить автора">
+    </p>
+</form>

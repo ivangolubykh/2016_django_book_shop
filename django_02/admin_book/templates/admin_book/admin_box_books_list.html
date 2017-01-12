@@ -1,0 +1,63 @@
+<form method="post" id="item_list">
+    {% csrf_token %}
+    <center>Добавить книгу:</center>
+    <table class="item_list">
+        {% for item in form_item_add %}
+            <tr>
+                <td>{{ item.label_tag }}
+                    {% if item.errors %}
+                        <ul>
+                            <li class="error_registrations">Ошибка: {{ item.errors }}</li>
+                        </ul>
+                    {% endif %}
+                </td>
+                <td>
+                    {{ item }}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="2">
+                <input type="hidden" name="change_data" value="item_list">
+                <input class="change_data" admin_change="item_list" type="button" value="Добавить новую книгу">
+            </td>
+        </tr>
+    </table>
+</form>
+<hr>
+
+{% if item_list|length != 0 %}
+    <center>Список книг:</center>
+    <center>
+        {% if item_list.number > 1 %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.previous_page_number }}>&lt;&lt;previous
+            ({{ item_list.previous_page_number }}) |</strong>
+        {% endif %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.number }}>Обновить список
+            ({{ item_list.number }}):</strong>
+        {% if item_list.number < item_list.paginator.num_pages %}
+        <strong class="change_data" admin_change="item_list_page" page_num={{ item_list.next_page_number }}>| next
+            ({{ item_list.next_page_number }})&gt;&gt;</strong>
+        {% endif %}
+    </center>
+    <table class="item_list">
+        <tr>
+            {% for item in form_item_add %}
+                <td>
+                   {{ item.label_tag }}
+                </td>
+            {% endfor %}
+                <td>
+                   Дата создания
+                </td>
+        </tr>
+
+        {% for item in item_list %}
+            <tr  id="item_id_{{ item.id }}">
+                {% include 'admin_book/admin_box_books_info.html' %}
+            </tr>
+        {% endfor %}
+
+    </table>
+
+{% endif %}

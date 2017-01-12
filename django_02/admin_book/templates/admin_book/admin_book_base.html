@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ru">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="{% static 'admin_book/static/style/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'admin_book/static/style/style.css' %}">
+	<link rel="stylesheet" href="{% static 'admin_book/static/style/admin_book.css' %}">
+</head>
+<body>
+<div class="overfooter">
+	<header>
+		<table>
+			<tr>
+				<td>
+					<a href="{% url 'main' %}">Главная страница сайта</a>
+					<a href="{% url 'admin_main' %}">Главная страница админки</a>
+					<a href="{% url 'admin_book_author' %}">Админка Авторов Книг</a>
+                    <a href="{% url 'admin_book_categor' %}">Админка Категорий Книг</a>
+                    <a href="{% url 'admin_book' %}">Админка Книг</a>
+				</td>
+				<td class="form_reg">
+
+					{% include 'authorization/box_login.html' %}
+
+				</td>
+			</tr>
+		</table>
+	</header>
+	<article class="content">
+
+        {% block content %}
+        {% endblock %}
+
+	</article>
+</div>
+<footer>
+	<div class="nothing"></div><!--
+	--><p>Copyright © 2016, Иван Борисович Голубых</p>
+</footer>
+
+{% block addEndScript %}
+{% endblock %}
+
+</body>
+</html>

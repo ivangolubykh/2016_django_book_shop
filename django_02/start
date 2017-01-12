@@ -21,3 +21,29 @@
 # python3 manage.py startapp <название приложения>
 # Создать суперпользователя:
 #./manage.py createsuperuser
+
+
+#Запускаем интерактивную консоль django:
+#./manage.py shell
+
+##########
+# Быстрая установка Django Debug Toolbar
+# Скачать и установить:
+#pip3 install django-debug-toolbar
+# Добавить следующее в файл настроек settings.py:
+#if DEBUG:
+#    # автозапуск модуля панельки
+#    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+#    # включение панельки в список установленых приложений
+#    INSTALLED_APPS += ('debug_toolbar',)
+#    # IP-адрес браузера, а не сервера:
+#    INTERNAL_IPS = ('127.0.0.1',)
+#
+# Добавить следующее в файл urls.py:
+#if settings.DEBUG:
+#    import debug_toolbar
+#    urlpatterns += [
+#        url(r'^__debug__/', include(debug_toolbar.urls)),
+#    ]
+# Теперь на каждой странице сбоку будет панелька отладки
+##########

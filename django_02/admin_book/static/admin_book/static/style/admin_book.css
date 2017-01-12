@@ -1,0 +1,45 @@
+.item_list {
+	margin: 5px auto;
+
+}
+
+.item_list tr:first-child {
+	font-weight: bold;
+}
+
+.item_list td, .item_list tr {
+	border: 1px solid black;
+	text-align: center;
+	padding: 3px;
+}
+
+.item_list a {
+    color: blue;
+}
+
+.item_list a:visited {
+    color: maroon;
+}
+
+.change_data {
+    cursor: pointer;
+    color: green;
+}
+
+.userdelete {
+    color: red;
+}
+
+header a {
+    border-bottom: 2px solid maroon;
+}
+
+header td:first-child a {
+    border-bottom: none;
+}
+
+h1 {
+    text-align: center;
+    font-size: 18px;
+    margin: 10px;
+}

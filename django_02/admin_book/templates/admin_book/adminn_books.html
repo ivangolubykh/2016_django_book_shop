@@ -1,0 +1,21 @@
+{% extends "admin_book/admin_book_base.html" %}
+{% load staticfiles %}
+
+{% block title %}Редактирование контента.{% endblock %}
+
+
+{% block content %}
+    <h1>Книги:</h1>
+    <div id="List_Dinamo">
+        {% include 'admin_book/admin_box_books_list.html' %}
+    </div>
+{% endblock %}
+
+{% block addEndScript %}
+	<script src="{% static 'admin_book/static/js/jquery.min.js' %}"></script>
+    <script>
+        var url_admin_ajax_items = '{% url 'admin_book' %}';
+        var send_file = true;
+    </script>
+	<script src="{% static 'admin_book/static/js/admin_books.js' %}"></script>
+{% endblock %}

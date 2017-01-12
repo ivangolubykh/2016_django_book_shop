@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="ru">
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="{% static 'admin_users/static/style/reset.css' %}">
+	<link rel="stylesheet" href="{% static 'admin_users/static/style/style.css' %}">
+	<link rel="stylesheet" href="{% static 'admin_users/static/style/admin_users.css' %}">
+</head>
+<body>
+<div class="overfooter">
+	<header>
+		<table>
+			<tr>
+				<td>
+					<a href="{% url 'main' %}">Главная страница сайта</a>
+					<a href="{% url 'admin_main' %}">Главная страница админки</a>
+					<a href="{% url 'admin_book_author' %}">Админка Авторов Книг</a>
+                    <a href="{% url 'admin_book_categor' %}">Админка Категорий Книг</a>
+                    <a href="{% url 'admin_book' %}">Админка Книг</a>
+				</td>
+				<td class="form_reg">
+
+					{% include 'authorization/box_login.html' %}
+
+				</td>
+			</tr>
+		</table>
+	</header>
+	<article class="content">
+
+{% block content %}
+
+    <br>
+    <p>Пароль админских аккаунтов (suser, superuser): q12345678</p>
+    <p>Пароль обычных аккаунтов (usver-01, Usver-02) (8*z): zzzzzzzz</p>
+    <hr>
+    <br>
+
+
+	{% if user.is_authenticated %}
+		{% if user.is_staff %}
+			<div id="Dinamo_list">
+
+				{% include 'admin_users/admin_userlist.html' %}
+
+			</div>
+		{% else %}
+			<br><br><p>Вы НЕ администратор</p><br><br>
+		{% endif %}
+	{% else %}
+		<h1>Вход воспрещён.</h1>
+		<p>Пока что тестовый пользователь: suser q12345678</p>
+	{% endif %}
+
+
+{% endblock %}
+
+	</article>
+</div>
+<footer>
+	<div class="nothing"></div><!--
+	--><p>Copyright © 2016, Иван Борисович Голубых</p>
+</footer>
+
+
+{% block addEndScript %}
+	<script src="{% static 'admin_users/static/js/jquery.min.js' %}"></script>
+<script>
+	var url_admin_ajax_change_view = '{% url 'admin_change_data' %}';
+</script>
+	<script src="{% static 'admin_users/static/js/admin_users.js' %}"></script>
+{% endblock %}
+
+
+</body>
+</html>

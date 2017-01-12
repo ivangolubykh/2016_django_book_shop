@@ -37,7 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'administrations',
+
+    'authorization',
+    'admin_users',
+    'admin_book',
     'mainapp',
 ]
 
@@ -129,3 +132,13 @@ STATICFILES_DIRS = (
 # абсолютный путь к каталогу для загруженных файлов, в.т.ч. картинок.
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
+
+
+if DEBUG:
+    pass
+##### автозапуск модуля панельки:
+    # MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+##### включение панельки в список установленых приложений:
+    # INSTALLED_APPS += ('debug_toolbar',)
+##### IP-адрес браузера, а не сервера:
+    # INTERNAL_IPS = ('127.0.0.1',)
