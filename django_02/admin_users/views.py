@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from admin_users.forms import Edit_User_Form, Edit_User_Passw
 #from django.http import Http404, JsonResponse
@@ -17,10 +18,12 @@ from admin_users.forms import Edit_User_Form, Edit_User_Passw
 # на существующие в проекте.
 ########################
 
+ITEMS_TO_PAGE = 5  # количество элементов на странице
 
 def Admin_Main(request):
     list = User.objects.order_by('username')
-    return render(request, 'admin_users/admin_users_base.html', {'list': list})
+    paginator = Paginator(list, ITEMS_TO_PAGE)
+    return render(request, 'admin_users/admin_users_base.html', {'list': paginator.page(1)})
 
 
 def Veryfy_Admin_Autorizations(request):
@@ -43,6 +46,19 @@ def Admin_Change_Data(request):
                 # 001 - Ошибка запроса. Нет change_data
             if change_data  == 'userlist':
                 list = User.objects.order_by( 'username')
+                paginator = Paginator(list, ITEMS_TO_PAGE) # количество элементов на странице
+                try:
+                    page = request.POST['page_num']
+                except:
+                    page = 1
+                try:
+                    list = paginator.page(page)
+                except PageNotAnInteger:
+                    # If page is not an integer, deliver first page.
+                    list = paginator.page(1)
+                except EmptyPage:
+                    # If page is out of range (e.g. 9999), deliver last page of results.
+                    list = paginator.page(paginator.num_pages)
                 return render(request, 'admin_users/admin_userlist.html', {'list': list})
                 # Если надо отправить без http-заголовка
                 # html = loader.render_to_string('admin_users/admin_userlist.html', {'list': list}, request=request)

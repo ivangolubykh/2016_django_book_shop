@@ -19,7 +19,7 @@ jQuery(document).ready(function ($) {
         }
         var csrftoken = getCookie('csrftoken');
         if ($(this).attr('admin_change') == 'userlist') {
-            var data = {'change_data':$(this).attr('admin_change')};
+            var data = {'change_data':$(this).attr('admin_change'), 'page_num':$(this).attr('page_num')};
             var ajax_url = url_admin_ajax_change_view;
             var change_id = 'Dinamo_list';
         }

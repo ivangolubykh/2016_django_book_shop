@@ -1,3 +1,17 @@
+<center>
+    {% if list.number > 1 %}
+    <strong class="change_data" admin_change="userlist" page_num={{ list.previous_page_number }}>&lt;&lt;previous
+        ({{ list.previous_page_number }}) |</strong>
+    {% endif %}
+    <strong class="change_data" admin_change="userlist" page_num={{ list.number }}>Показать/обновить список пользователей
+        ({{ list.number }}):</strong>
+    {% if list.number < list.paginator.num_pages %}
+    <strong class="change_data" admin_change="userlist" page_num={{ list.next_page_number }}>| next
+        ({{ list.next_page_number }})&gt;&gt;</strong>
+    {% endif %}
+</center>
+<center>(Всего {{ list.paginator.num_pages }} страниц)</center>
+
 <table class="userlist">
     <tr>
         <td>id</td>
@@ -17,5 +31,4 @@
             {% include 'admin_users/admin_box_user_info.html' %}
         </tr>
     {% endfor %}
-
 </table>

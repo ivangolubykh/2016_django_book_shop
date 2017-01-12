@@ -42,7 +42,6 @@
 
 	{% if user.is_authenticated %}
 		{% if user.is_staff %}
-			<center><strong class="change_data" admin_change="userlist">Показать/обновить список пользователей:</strong></center>
 			<div id="Dinamo_list">
 
 				{% include 'admin_users/admin_userlist.html' %}
