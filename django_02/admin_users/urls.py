@@ -20,4 +20,3 @@ urlpatterns = [
     url(r'^$', Admin_Main, name='admin_main'),
     url(r'^view_user_list/$', Admin_Change_Data, name='admin_change_data'),
 ]
-
