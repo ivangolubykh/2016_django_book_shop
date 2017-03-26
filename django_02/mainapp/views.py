@@ -7,6 +7,7 @@ from general_function.general_function import Return_to_back
 def Main(request):
     return render(request, 'index.html')
 
+
 def Register_User(request):
     if request.method == 'POST':
         form = Add_User_Form(request.POST)
@@ -17,7 +18,6 @@ def Register_User(request):
         return render(request, 'register_user.html', context)
     context = {'form': Add_User_Form()}
     return render(request, 'register_user.html', context)
-
 
 
 def List_Books(request, booknumber):
