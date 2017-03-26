@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-#    'django.contrib.admin',
+    # 'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -67,7 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.media', # добавил для работы MEDIA_URL
+                # добавил для работы MEDIA_URL:
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -92,16 +93,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -136,9 +141,9 @@ MEDIA_URL = '/media/'
 
 if DEBUG:
     pass
-##### автозапуск модуля панельки:
+    # автозапуск модуля панельки:
     # MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
-##### включение панельки в список установленых приложений:
+    # включение панельки в список установленых приложений:
     # INSTALLED_APPS += ('debug_toolbar',)
-##### IP-адрес браузера, а не сервера:
+    # IP-адрес браузера, а не сервера:
     # INTERNAL_IPS = ('127.0.0.1',)

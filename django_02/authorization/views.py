@@ -2,7 +2,7 @@ from django.contrib import auth
 
 # Create your views here.
 from django.shortcuts import render, HttpResponseRedirect
-#from django.http import Http404
+# from django.http import Http404
 
 
 def Return_to_back(request):
@@ -11,7 +11,8 @@ def Return_to_back(request):
     except:
         referer = False
     if referer:
-        # if request.path == reverse('login') or request.path == reverse('login'):
+        # if request.path == reverse('login') or
+        #     request.path == reverse('login'):
         if referer == request.build_absolute_uri():
             return HttpResponseRedirect("/")
         else:
@@ -34,7 +35,7 @@ def Login(request):
         else:
             return render(request, 'index.html', {'erros': 'true'})
     else:
-#        raise Http404
+        # raise Http404
         return Return_to_back(request)
 
 
