@@ -19,7 +19,7 @@ from .views import Admin_Books_Authors, Admin_Books_Categories, Admin_Books
 
 urlpatterns = [
     url(r'^books_authors/$', Admin_Books_Authors, name='admin_book_author'),
-    url(r'^books_categories/$', Admin_Books_Categories, name='admin_book_categor'),
+    url(r'^books_categories/$', Admin_Books_Categories,
+        name='admin_book_categor'),
     url(r'^books/$', Admin_Books, name='admin_book'),
 ]
-

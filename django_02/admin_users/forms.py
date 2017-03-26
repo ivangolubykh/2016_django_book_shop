@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm, SetPasswordForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm,\
+    SetPasswordForm
 
 
 class Add_User_Form(UserCreationForm):
@@ -11,8 +12,11 @@ class Add_User_Form(UserCreationForm):
     class Meta:
         # Модель (БД) данных, которую используем:
         model = User
-        # Типы полей, отображаемых в форме и их порядок отображения в браузере  (поля 'password1', 'password2' и те, что созданв в этом классе выше - есть всегда); поля 'username' и 'email' встроенные:
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        # Типы полей, отображаемых в форме и их порядок отображения в браузере
+        # (поля 'password1', 'password2' и те, что созданв в этом классе
+        # выше - есть всегда); поля 'username' и 'email' встроенные:
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1',
+                  'password2')
         # fields = ('__all__')
 
     def save(self, commit=True):
@@ -35,7 +39,8 @@ class Edit_User_Form(UserChangeForm):
         # Модель (БД) данных, которую используем:
         model = User
         # Типы полей, отображаемых в форме
-        fields = ('username', 'is_superuser', 'is_staff', 'email', 'first_name', 'last_name', 'password')
+        fields = ('username', 'is_superuser', 'is_staff', 'email',
+                  'first_name', 'last_name', 'password')
         # fields = ('__all__')
 
 
@@ -47,6 +52,6 @@ class Edit_User_Passw(SetPasswordForm):
         # Модель (БД) данных, которую используем:
         model = User
         # Типы полей, отображаемых в форме
-        # fields = ('username', 'is_superuser', 'is_staff', 'email', 'first_name', 'last_name', 'password')
+        # fields = ('username', 'is_superuser', 'is_staff', 'email',
+        # 'first_name', 'last_name', 'password')
         fields = ('__all__')
-
