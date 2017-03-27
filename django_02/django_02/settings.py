@@ -138,6 +138,8 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = '/media/'
 
+# Изменяю время жизни сессии (в т.ч. логинов) со стандартных 2 недель до 5 лет:
+SESSION_COOKIE_AGE = 157680000
 
 if DEBUG:
     pass
