@@ -141,11 +141,35 @@ MEDIA_URL = '/media/'
 # Изменяю время жизни сессии (в т.ч. логинов) со стандартных 2 недель до 5 лет:
 SESSION_COOKIE_AGE = 157680000
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        # 'file': {
+        #     'level': 'DEBUG',
+        #     'class': 'logging.FileHandler',
+        #     'filename': '/tmp/ZZZ.log',
+        # },
+    },
+    'loggers': {
+        'mylog': {
+            # 'handlers': ['file', 'console'],
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}
+
 if DEBUG:
     pass
     # автозапуск модуля панельки:
-    # MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
     # включение панельки в список установленых приложений:
-    # INSTALLED_APPS += ('debug_toolbar',)
+    INSTALLED_APPS += ('debug_toolbar',)
     # IP-адрес браузера, а не сервера:
-    # INTERNAL_IPS = ('127.0.0.1',)
+    INTERNAL_IPS = ('127.0.0.1',)
