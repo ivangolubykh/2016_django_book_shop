@@ -196,3 +196,8 @@ footer a {
     color: inherit;
 }
 
+.head_categor_book {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+}

@@ -1,3 +1,22 @@
 {% extends "base.html" %}
 
 {% block title %}Тестовый магазин книг.{% endblock %}
+{% block content  %}
+    <p>Временная ссылка на админку: <a href="{% url 'admin_main' %}" style="color: blue;">{% url 'admin_main' %}</a></p>
+    <p>Пока что тестовый пользователь: suser q12345678</p>
+    <div>
+        {% for categor in object_list %}
+            <h2 class="head_categor_book">
+                {{categor}}
+            </h2>
+            <div>
+                {% for item in categor.books_set.all %}
+                    {{item.bimagelarge}}
+                    <br>{{item}}
+
+                {% endfor %}
+            </div>
+
+        {% endfor %}
+    </div>
+{% endblock %}
