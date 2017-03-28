@@ -4,21 +4,22 @@
 {% block content  %}
     <p>Временная ссылка на админку: <a href="{% url 'admin_main' %}" style="color: blue;">{% url 'admin_main' %}</a></p>
     <p>Пока что тестовый пользователь: suser q12345678</p>
-    <div>
+    <section class="books">
         {% for categor in object_list %}
             <h2 class="head_categor_book">
                 {{categor}}
             </h2>
             <div>
                 {% for item in categor.books_set.all %}
-                    <br><br>LARGE={{item.bimage}}
-                    <br>small={{item.bimagesmall}}
-
-                    <br>{{item}}
-
+                    <div>
+                        <a href="{{ MEDIA_URL }}{{item.bimage}}" target="_blank"
+                        title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{item.bimagesmall}}"></a>
+                        <p><i>Автор:</i> {{item.bauthor}}</p>
+                        <p><i>Название:</i> {{item.bname}}</p>
+                    </div>
                 {% endfor %}
             </div>
 
         {% endfor %}
-    </div>
+    </section>
 {% endblock %}
