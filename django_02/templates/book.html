@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 
-{% block title %}Тестовый магазин книг.{% endblock %}
+{% block title %}{{object}}{% endblock %}
 {% block content  %}
-    <p>Временная ссылка на админку: <a href="{% url 'admin_main' %}" style="color: blue;">{% url 'admin_main' %}</a></p>
-    <p>Пока что тестовый пользователь: suser q12345678</p>
     <section class="books">
+        <a href="{{ MEDIA_URL }}{{object.bimage}}" target="_blank"
+           title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{object.bimagesmall}}"></a>
+        <p><i>Категори:</i>
+            {% for categor in object.bcategories.all %}
+                {{categor}}{% if not forloop.last %},{% endif %}
+            {% endfor %}
+            </p>
+        <p><i>Автор:</i> {{object.bauthor}}</p>
+        <p><i>Название:</i> {{object.bname}}</p>
+
         {% for categor in object_list %}
             <h2 class="head_categor_book">
                 {{categor}}
@@ -19,7 +27,7 @@
                     </div>
                 {% endfor %}
             </div>
-
         {% endfor %}
+
     </section>
 {% endblock %}

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from admin_users.forms import Add_User_Form
 from general_function.general_function import Return_to_back
 from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from admin_book.models import Books_Categories, Books
 
 
@@ -11,6 +12,12 @@ class MainListView(ListView):
     queryset = Books_Categories.objects.prefetch_related('books_set',
                                                          'books_set__bauthor')
     template_name = 'index.html'
+
+
+class BookDetailView(DetailView):
+    # model = Books
+    queryset = Books.objects.prefetch_related('bauthor', 'bcategories')
+    template_name = 'book.html'
 
 
 def Register_User(request):

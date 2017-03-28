@@ -228,7 +228,7 @@ footer a {
 	background: #dfdfdf;
 }
 
-.books > div > div img {
+.books img {
     float: left;
 }
 
@@ -238,4 +238,9 @@ footer a {
 .books > div > div p i {
     margin: 5px;
     font-style: italic;
+}
+
+.books a:link, .books a {
+    color: blue;
+    text-decoration:underline;
 }
