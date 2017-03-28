@@ -1,11 +1,23 @@
 from django.shortcuts import render
-
 from admin_users.forms import Add_User_Form
 from general_function.general_function import Return_to_back
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from admin_book.models import Books_Categories, Books
 
 
-def Main(request):
-    return render(request, 'index.html')
+# Список книг на главной с помощью клсасса:
+class MainListView(ListView):
+    # model = Books_Categories
+    queryset = Books_Categories.objects.order_by('bcname').\
+        prefetch_related('books_set', 'books_set__bauthor')
+    template_name = 'index.html'
+
+
+class BookDetailView(DetailView):
+    # model = Books
+    queryset = Books.objects.prefetch_related('bauthor', 'bcategories')
+    template_name = 'book.html'
 
 
 def Register_User(request):

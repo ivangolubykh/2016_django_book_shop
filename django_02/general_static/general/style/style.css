@@ -196,3 +196,51 @@ footer a {
     color: inherit;
 }
 
+.head_categor_book {
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+}
+
+.books {
+    line-height: 1;
+    text-indent: 0;
+    vertical-align: top;
+    width: 100%;
+}
+
+.books h2 {
+    margin: 10px 0px;
+}
+
+.books > div {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.books > div > div {
+	display: inline-block;
+	padding: 3px;
+	width: calc(100% / 3 - 11px);
+	min-width: 300px;
+    text-align: justify;
+	background: #dfdfdf;
+}
+
+.books img {
+    float: left;
+}
+
+.books > div > div p {
+    margin: 5px;
+}
+.books > div > div p i {
+    margin: 5px;
+    font-style: italic;
+}
+
+.books a:link, .books a {
+    color: blue;
+    text-decoration:underline;
+}
