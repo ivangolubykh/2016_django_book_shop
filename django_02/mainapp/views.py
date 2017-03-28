@@ -4,16 +4,12 @@ from general_function.general_function import Return_to_back
 from django.views.generic.list import ListView
 from admin_book.models import Books_Categories, Books
 
-'''
-# Список книг на главной с помощью функции:
-def Main(request):
-    return render(request, 'index.html')
-'''
-
 
 # Список книг на главной с помощью клсасса:
 class MainListView(ListView):
-    model = Books_Categories
+    # model = Books_Categories
+    queryset = Books_Categories.objects.prefetch_related('books_set',
+                                                         'books_set__bauthor')
     template_name = 'index.html'
 
 

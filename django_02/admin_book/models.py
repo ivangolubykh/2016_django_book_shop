@@ -3,6 +3,7 @@ from os import path
 from PIL import Image
 # Create your models here.
 
+
 class Books_Categories(models.Model):
     bcname = models.CharField(max_length=255, blank=False, db_index=True,
                               unique=True,
@@ -43,7 +44,16 @@ class Books(models.Model):
     bcdateadd = models.DateTimeField(auto_now_add=True,
                                      verbose_name="Дата добавления")
     bimage = models.ImageField(upload_to='books_image_large/',
-                                    blank=False, verbose_name="Картинка")
+                               blank=False, verbose_name="Картинка")
+
+    def bimagesmall(self):
+        try:
+            file = str(self.bimage)
+            path_file, file = path.split(file)
+            file, ext = path.splitext(file)
+            return '{}_small{}'.format(path.join(path_file, file), ext)
+        except:
+            pass
 
     def __str__(self):
         return self.bname
@@ -65,23 +75,12 @@ class Books(models.Model):
                 image = Image.open(filepath)
                 # resize - безопасная функция, она создаёт новый объект, а не
                 # вносит изменения в исходный, поэтому так
-                image = image.resize(
-                    (
-                    round(width / max_size * _MAX_SIZE),  # Сохраняем пропорции
-                    round(height / max_size * _MAX_SIZE)),
-                    Image.ANTIALIAS
-                )
+                image = image.resize((round(width / max_size * _MAX_SIZE),
+                                      round(height / max_size * _MAX_SIZE)),
+                                     Image.ANTIALIAS
+                                     )
                 # И не забыть сохраниться
                 path_file, file = path.split(filepath)
                 file, ext = path.splitext(file)
                 filepath = '{}_small{}'.format(path.join(path_file, file), ext)
                 image.save(filepath)
-
-    def bimagesmall(self):
-        try:
-            file = str(self.bimage)
-            path_file, file = path.split(file)
-            file, ext = path.splitext(file)
-            return '{}_small{}'.format(path.join(path_file, file), ext)
-        except:
-            pass
