@@ -9,8 +9,8 @@ from admin_book.models import Books_Categories, Books
 # Список книг на главной с помощью клсасса:
 class MainListView(ListView):
     # model = Books_Categories
-    queryset = Books_Categories.objects.prefetch_related('books_set',
-                                                         'books_set__bauthor')
+    queryset = Books_Categories.objects.order_by('bcname').\
+        prefetch_related('books_set', 'books_set__bauthor')
     template_name = 'index.html'
 
 

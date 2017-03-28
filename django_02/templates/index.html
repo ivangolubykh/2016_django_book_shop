@@ -10,7 +10,7 @@
                 {{categor}}
             </h2>
             <div>
-                {% for item in categor.books_set.all %}
+                {% for item in categor.books_set.all|dictsort:"bname" %}
                     <div>
                         <a href="{{ MEDIA_URL }}{{item.bimage}}" target="_blank"
                         title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{item.bimagesmall}}"></a>

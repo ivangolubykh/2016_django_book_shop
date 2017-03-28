@@ -6,7 +6,7 @@
         <a href="{{ MEDIA_URL }}{{object.bimage}}" target="_blank"
            title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{object.bimagesmall}}"></a>
         <p><i>Категори:</i>
-            {% for categor in object.bcategories.all %}
+            {% for categor in object.bcategories.all|dictsort:"bcname" %}
                 {{categor}}{% if not forloop.last %},{% endif %}
             {% endfor %}
             </p>
