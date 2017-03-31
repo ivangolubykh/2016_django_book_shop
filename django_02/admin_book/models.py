@@ -78,8 +78,10 @@ class Books(models.Model):
             storage, filepath = old_obj.bimage.storage, old_obj.bimage.path
             storage.delete(filepath)
             default_storage.delete(small_image_faile_name(filepath))
-        # Если картинка есть, то создаю уменьшенную копию:
-        if self.bimage:
+        # Если добавиласть новая картинка или изменилась старая, то создаю
+        # уменьшенную копию:
+        if not old_obj or (old_obj and
+                           old_obj.bimage.path != self.bimage.path):
             filepath = self.bimage.path
             width = self.bimage.width
             height = self.bimage.height
