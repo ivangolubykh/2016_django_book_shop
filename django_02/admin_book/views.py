@@ -102,7 +102,8 @@ def List_Edit_item(request, model, form_edit, sortBy, external_indexes,
                                                      ' charset=utf-8')
                     # 006 - Ошибка запроса. Нет item_id
                 item_editing = get_object_or_404(model, id=edit_id)
-                form = form_edit(request.POST or None, instance=item_editing)
+                form = form_edit(request.POST or None, request.FILES,
+                                 instance=item_editing)
                 if form.is_valid():
                     form.save()
                     item = model.objects.prefetch_related(*external_indexes).\

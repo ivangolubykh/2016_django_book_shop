@@ -11,7 +11,9 @@
     {{ item.brating }}
 </td>
 <td>
-    <img src="{{ MEDIA_URL }}{{ item.bimage }}">
+    <a href="{{ MEDIA_URL }}{{ item.bimage }}" target="_blank" title="Большая картинка откроется в новом окне">
+        <img src="{{ MEDIA_URL }}{{ item.bimagesmall }}">
+    </a>
 </td>
 <td>
     {{ item.bcdateadd }}
