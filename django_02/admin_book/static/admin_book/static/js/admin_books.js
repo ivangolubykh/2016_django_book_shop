@@ -44,7 +44,14 @@ jQuery(document).ready(function ($) {
             var change_id='item_id_'+$(this).attr('item_id');
         }
         else if ($(this).attr('admin_change') == 'item_end_edit') {
-            var data = jQuery("#"+'item_end_edit_id_'+$(this).attr('item_id')).serialize();
+            if (send_file == true) {
+                var data = new FormData(document.getElementById('item_end_edit_id_'+$(this).attr('item_id')));
+                process_data = false;
+                content_type = false;
+            }
+            else {
+                var data = jQuery("#"+'item_end_edit_id_'+$(this).attr('item_id')).serialize();
+            }
             var ajax_url = url_admin_ajax_items;
             var change_id='item_id_'+$(this).attr('item_id');
         }
