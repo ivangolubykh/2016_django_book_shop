@@ -244,3 +244,7 @@ footer a {
     color: blue;
     text-decoration:underline;
 }
+
+b {
+    font-weight: 600;
+}

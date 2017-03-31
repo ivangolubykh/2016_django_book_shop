@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load filters_mainapp %}
+
+{% block title %}Тестовый магазин книг.{% endblock %}
+{% block content  %}
+    <center>
+        {% if paginator.num_pages > 1 %}
+            {% if page_obj.has_previous %}
+                <strong class="change_data">
+                    <a href="{{ get_get|get_add:page_obj.previous_page_number }}">&lt;&lt;previous</a>
+                </strong>
+            {% endif %}
+
+            <span class="current">
+                |&nbsp;Страница {{ page_obj.number }} из {{ paginator.num_pages }}&nbsp;|
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="{{ get_get|get_add:page_obj.next_page_number }}">next&gt;&gt;</a>
+            {% endif %}
+        {% endif %}
+    </center>
+    <p>Вы искали: <b>{{ q }}</b></p>
+    <p>Результаты поиска:</p>
+        <section class="books">
+            <div>
+                {% for book in object_list|dictsort:"bname" %}
+                    <div>
+                        <a href="{{ MEDIA_URL }}{{book.bimage}}" target="_blank"
+                        title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{book.bimagesmall}}"></a>
+                        <p><i>Автор:</i> {{book.bauthor}}</p>
+                        <p><i>Название:</i> <a href="{% url 'book' book.pk %}">{{book.bname}}</a></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+{% endblock %}

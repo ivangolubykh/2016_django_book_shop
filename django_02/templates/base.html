@@ -46,7 +46,12 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" class="search">Поиск</td>
+				<td colspan="3" class="search">
+                    <form action="{% url 'search' %}" method="get" accept-charset="utf-8">
+                        <input type="text" placeholder="Укажите автора или название" name="q" value="{{ q }}">
+                        <button type="submit">Найти книгу</button>
+                    </form>
+                </td>
 			</tr>
 		</table>
 	</header>
