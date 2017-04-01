@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from .views import MainListView, Register_User, BookDetailView,\
-    SearchBookListView, CategoryListView, CategoryDetailView
+    SearchBookListView, CategoryListView, CategoryDetailView, Transport
 
 
 urlpatterns = [
@@ -26,4 +26,5 @@ urlpatterns = [
     url(r'^category/$', CategoryListView.as_view(), name='category'),
     url(r'^category/(?P<pk>[\d]+)/$', CategoryDetailView.as_view(),
         name='category_detail'),
+    url(r'^transport/$', Transport, name='transport'),
 ]

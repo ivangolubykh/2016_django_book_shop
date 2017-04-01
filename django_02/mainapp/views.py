@@ -33,10 +33,6 @@ def Register_User(request):
     return render(request, 'register_user.html', context)
 
 
-# def List_Books(request, booknumber):
-#     return render(request, 'admin_book/adminn_books_authors.html')
-
-
 class SearchBookListView(ListView):
     model = Books
     paginate_by = 2
@@ -80,3 +76,7 @@ class CategoryDetailView(DetailView):
     queryset = Books_Categories.objects.prefetch_related('books_set',
                                                          'books_set__bauthor')
     template_name = 'category_detail.html'
+
+
+def Transport(request):
+    return render(request, 'transport.html')
