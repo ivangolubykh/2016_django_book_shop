@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Тестовый магазин книг. Категории книг.{% endblock %}
+{% block content  %}
+    <br>
+    <h2 class="head_categor_book">Категори книг на сайте:</h2>
+    <br>
+    <section class="books">
+        {% for categor in object_list %}
+            <div>
+                <div>
+                    <h2 class="head_categor_book">
+                        <a href="{% url 'category_detail' categor.pk %}">{{categor.bcname}}</a>
+                    </h2>
+                    <p><i>Описание:</i> {{categor.bcdescr}}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

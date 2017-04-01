@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{object}}{% endblock %}
+{% block content  %}
+    <section class="books">
+        <h2>{{object.bcname}}</h2>
+        <p><i>Описание:</i> {{object.bcdescr}}</p>
+
+        <div>
+        {% for books in object.books_set.all %}
+            <div>
+                <a href="{{ MEDIA_URL }}{{books.bimage}}" target="_blank"
+                title="Посмотреть крупнее в новом окне"><img src="{{ MEDIA_URL }}{{books.bimagesmall}}"></a>
+                <p><i>Автор:</i> {{books.bauthor}}</p>
+                <p><i>Название:</i> <a href="{% url 'book' books.pk %}">{{books.bname}}</a></p>
+            </div>
+        {% endfor %}
+        </div>
+
+    </section>
+{% endblock %}

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from .views import MainListView, Register_User, BookDetailView,\
-    SearchBookListView
+    SearchBookListView, CategoryListView, CategoryDetailView, Transport
 
 
 urlpatterns = [
@@ -23,4 +23,8 @@ urlpatterns = [
     url(r'^registration/$', Register_User, name='register_user'),
     url(r'^book/(?P<pk>[\d]+)/$', BookDetailView.as_view(), name='book'),
     url(r'^search/$', SearchBookListView.as_view(), name='search'),
+    url(r'^category/$', CategoryListView.as_view(), name='category'),
+    url(r'^category/(?P<pk>[\d]+)/$', CategoryDetailView.as_view(),
+        name='category_detail'),
+    url(r'^transport/$', Transport, name='transport'),
 ]
