@@ -33,8 +33,8 @@ def Register_User(request):
     return render(request, 'register_user.html', context)
 
 
-def List_Books(request, booknumber):
-    return render(request, 'admin_book/adminn_books_authors.html')
+# def List_Books(request, booknumber):
+#     return render(request, 'admin_book/adminn_books_authors.html')
 
 
 class SearchBookListView(ListView):
@@ -67,3 +67,16 @@ class SearchBookListView(ListView):
         if self.request.GET.get('q'):
             context['q'] = self.request.GET.get('q')
         return context
+
+
+class CategoryListView(ListView):
+    # model = Books_Categories
+    queryset = Books_Categories.objects.order_by('bcname')
+    template_name = 'category.html'
+
+
+class CategoryDetailView(DetailView):
+    # model = Books_Categories
+    queryset = Books_Categories.objects.prefetch_related('books_set',
+                                                         'books_set__bauthor')
+    template_name = 'category_detail.html'
