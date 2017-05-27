@@ -26,13 +26,13 @@ from django.conf.urls import url, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-starturl = r'^django/profile_ig/test_magazine-01/'
+starturl = r'^portfolio/2016_django_book_shop/'
 
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     # редирект с главной страницы в папку:
     url(r'^$', RedirectView.
-        as_view(url='django/profile_ig/test_magazine-01/')),
+        as_view(url='portfolio/2016_django_book_shop/')),
 ]
 urlpatterns += [
     url(starturl, include('mainapp.urls')),
